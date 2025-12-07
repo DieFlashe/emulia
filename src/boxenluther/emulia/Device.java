@@ -222,13 +222,34 @@ public class Device {
 		return content;
 	}
 	public List<String> getCount() { 
+		String reboot_major = "9";
+		String reboot_minor = "9";
+		String run_hours = "1";
+		String run_days = "2";
+		String run_mounths = "3";
+		String run_years = "4";
+
+		// from DieFlashe
+		if (mapEnv.containsKey("counter__reboot_major"))
+			reboot_major = mapEnv.get("counter__reboot_major");
+		if (mapEnv.containsKey("counter__reboot_minor"))
+			reboot_minor = mapEnv.get("counter__reboot_minor");
+		if (mapEnv.containsKey("counter__run_hours"))
+			run_hours = mapEnv.get("counter__run_hours");
+		if (mapEnv.containsKey("counter__run_days"))
+			run_days = mapEnv.get("counter__run_days");
+		if (mapEnv.containsKey("counter__run_mounths"))
+			run_mounths = mapEnv.get("counter__run_mounths");
+		if (mapEnv.containsKey("counter__run_years"))
+			run_years = mapEnv.get("counter__run_years");
+
 		List<String> content = new ArrayList<String>();
-		content.add(minLen22("reboot_major") + "9");
-		content.add(minLen22("reboot_minor") + "9");
-		content.add(minLen22("run_hours") + "1");
-		content.add(minLen22("run_days") + "2");
-		content.add(minLen22("run_mounths") + "3");
-		content.add(minLen22("run_years") + "4");
+		content.add(minLen22("reboot_major") + reboot_major);
+		content.add(minLen22("reboot_minor") + reboot_minor);
+		content.add(minLen22("run_hours") + run_hours);
+		content.add(minLen22("run_days") + run_days);
+		content.add(minLen22("run_mounths") + run_mounths);
+		content.add(minLen22("run_years") + run_years);
 		return content;
 	}
 	public String dEva() {
