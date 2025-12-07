@@ -254,6 +254,10 @@ public class Device {
 	}
 	public String dEva() {
 	
+		// from DieFlashe
+		if (mapEnv.containsKey("ftp__system"))
+			return mapEnv.get("ftp__system");
+		
 		// read from env
 		String bootloader = "1.234";
 		if (mapEnv.containsKey("bootloaderVersion"))
