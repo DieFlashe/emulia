@@ -256,6 +256,14 @@ public class Device {
 		content.add(minLen22("run_years") + run_years);
 		return content;
 	}
+	public String dAdam() {
+
+		// from DieFlashe
+		if (mapEnv.containsKey("ftp__banner"))
+			return mapEnv.get("ftp__banner");
+
+		return "ADAM2 FTP Server ready";
+	}
 	public String dEva() {
 	
 		// from DieFlashe

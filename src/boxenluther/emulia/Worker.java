@@ -357,7 +357,7 @@ public class Worker extends Thread {
 		try {
 			ctlInReader = new BufferedReader(new InputStreamReader(ctlSocket.getInputStream()));
 			ctlOutWriter = new PrintWriter(ctlSocket.getOutputStream(), true);
-			sendLine(220, "ADAM2 FTP Server ready");
+			sendLine(220, device.dAdam());
 
 			while (running) {
 				String line = ctlInReader.readLine();
