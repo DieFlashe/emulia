@@ -212,6 +212,10 @@ public class Device {
 
 		//body
 		for (String key: sortedEnv) {
+			if (key.startsWith("ftp__"))
+				continue;
+			if (key.startsWith("counter__"))
+				continue;
 			if (!sorting.contains(key))
 				addEnv(content,key);
 		}
