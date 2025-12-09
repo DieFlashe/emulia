@@ -2,8 +2,8 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.11744 0x0 0x46409
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_hours    0
 counter__run_days     0
+counter__run_hours    0
 counter__run_mounths  0
 counter__run_years    0
 DMC                   SL1,nonFPGA
@@ -14,15 +14,15 @@ SerialNumber          123456789012345
 annex                 B
 autoload              yes
 bootloaderVersion     1.11744
-firstfreeaddress      0x80000000
 firmware_info         259.08.20
 firmware_version      avm
+firstfreeaddress      0x80000000
 flashsize             nor_size=0MB sflash_size=0KB nand_size=512MB
 maca                  48:5D:35:*
 macb                  48:5D:35:*
+macdsl                48:5D:35:*
 macwlan               48:5D:35:*
 macwlan2              48:5D:35:*
-macdsl                48:5D:35:*
 memsize               0x0c000000
 mtd0                  0x0,0x2C00000
 mtd1                  0x900000,0x1100000

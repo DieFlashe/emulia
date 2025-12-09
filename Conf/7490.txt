@@ -1,32 +1,33 @@
 ftp__banner           ADAM2 FTP Server ready
-ftp__system           AVM EVA Version 1.1964 0x0 0x740D
+ftp__system           AVM EVA Version 1.1777 0x0 0x740D
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_hours    0
 counter__run_days     0
+counter__run_hours    0
 counter__run_mounths  0
 counter__run_years    0
 HWRevision            185
-HWSubRevision         6
+HWSubRevision         1
 ProductID             Fritz_Box_HW185
 SerialNumber          0000000000000000
 annex                 B
 autoload              yes
-bootloaderVersion     1.1964
+bootloaderVersion     1.1777
 bootserport           tty0
 cpufrequency          500000000
-firstfreeaddress      0x81116240
 firmware_info         113.07.61
 firmware_version      avm
+firstfreeaddress      0x81116144
 flashsize             nor_size=0MB sflash_size=1024KB nand_size=512MB
-maca                  38:10:D5:*
-macb                  38:10:D5:*
-macwlan               38:10:D5:*
-macwlan2              38:10:D5:*
-macdsl                38:10:D5:*
+maca                  08:96:D7:*
+macb                  08:96:D7:*
+macdsl                08:96:D7:*
+macwlan               08:96:D7:*
+macwlan2              08:96:D7:*
 memsize               0x10000000
 modetty0              38400,n,8,1,hw
 modetty1              38400,n,8,1,hw
+modulemem             4802397
 mtd0                  0x400000,0x3400000
 mtd1                  0x0,0x400000
 mtd2                  0x0,0x40000
@@ -38,12 +39,12 @@ prompt                Eva_AVM
 req_fullrate_freq     250000000
 sysfrequency          250000000
 tr069_passphrase      123456789012
-tr069_serial          00040E-3810D5*
-urlader-version       2964
-usb_board_mac         38:10:D5:*
+tr069_serial          00040E-0896D7*
+urlader-version       2777
+usb_board_mac         08:96:D7:*
 usb_device_id         0x0000
 usb_device_name       USB DSL Device
 usb_manufacturer_name AVM
 usb_revision_id       0x0000
-usb_rndis_mac         38:10:D5:*
+usb_rndis_mac         08:96:D7:*
 wlan_key              12345678901234567890

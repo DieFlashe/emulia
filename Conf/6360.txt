@@ -15,11 +15,11 @@ autoload              yes
 bootloaderVersion     1.1381
 bootserport           tty0
 cpufrequency          400000000
-firmware_info         85.06.52
+firmware_info         85.06.51
 firmware_version      avm
 firstfreeaddress      0x806D8A1C
 flashsize             0x01000000
-jffs2_size            15
+jffs2_size            14
 maca                  9C:C7:A6:*
 macb                  9C:C7:A6:*
 macdsl                9C:C7:A6:*
@@ -27,7 +27,7 @@ macwlan               9C:C7:A6:*
 memsize               0x08000000
 modetty0              38400,n,8,1,hw
 modetty1              38400,n,8,1,hw
-modulemem             5333993
+modulemem             3537017
 mtd1                  0x48020000,0x48F80000
 mtd2                  0x48000000,0x48020000
 mtd3                  0x48F80000,0x48FC0000
