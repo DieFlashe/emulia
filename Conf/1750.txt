@@ -1,0 +1,46 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.3416 0x0 0x240D
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_days     0
+counter__run_hours    0
+counter__run_mounths  0
+counter__run_years    0
+HWRevision            206
+HWSubRevision         6
+ProductID             Fritz_Box_HW206
+SerialNumber          0000000000000000
+annex                 Ohne
+autoload              yes
+bootloaderVersion     1.3416
+bootserport           tty0
+cpufrequency          720000000
+firmware_info         134.07.32
+firmware_version      avm
+firstfreeaddress      0x821403CC
+flashsize             nor_size=0 sflash_size=16MB nand_size=0MB
+maca                  2C:3A:FD:*
+macb                  2C:3A:FD:*
+macdsl                2C:3A:FD:*
+macwlan               2C:3A:FD:*
+macwlan2              2C:3A:FD:*
+memsize               0x04000000
+modetty0              38400,n,8,1,hw
+modetty1              38400,n,8,1,hw
+mtd0                  0x9F000000,0x9F000000
+mtd1                  0x9F020000,0x9FF00000
+mtd2                  0x9F000000,0x9F020000
+mtd3                  0x9FF00000,0x9FF80000
+mtd4                  0x9FF80000,0xA0000000
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+req_fullrate_freq     200000000
+sysfrequency          200000000
+urlader-version       4416
+usb_board_mac         2C:3A:FD:*
+usb_device_id         0x0000
+usb_device_name       USB DSL Device
+usb_manufacturer_name AVM
+usb_revision_id       0x0000
+usb_rndis_mac         2C:3A:FD:*
+wlan_key              12345678
