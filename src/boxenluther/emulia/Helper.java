@@ -114,6 +114,7 @@ public final class Helper {
 		"bluetooth_key",
 		"bootloaderVersion",
 		"bootserport",
+		"companion_kernel_args",
 		"country",
 		"cpufrequency",
 		"crash",
