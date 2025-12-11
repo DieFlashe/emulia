@@ -1,0 +1,44 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.11581 0x0 0x46409
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_days     0
+counter__run_hours    0
+counter__run_mounths  0
+counter__run_years    0
+DMC                   SL1
+HWRevision            247
+HWSubRevision         3
+HardwareFeatures      nand=0xC2F1809502,cpu=0x979
+ProductID             Fritz_Box_HW247
+SerialNumber          123456789012345
+annex                 B
+autoload              yes
+bootloaderVersion     1.11581
+firmware_info         175.08.02
+firmware_version      avm
+firstfreeaddress      0x882540E8
+flashsize             nor_size=0MB sflash_size=0KB nand_size=128MB
+maca                  1C:ED:6F:*
+macb                  1C:ED:6F:*
+macdsl                1C:ED:6F:*
+macwlan               1C:ED:6F:*
+macwlan2              1C:ED:6F:*
+memsize               0x10000000
+mtd0                  0x0,0x2C00000
+mtd1                  0xB00000,0xF00000
+mtd2                  0x0,0x2C0000
+mtd3                  0x2C0000,0xB00000
+mtd4                  0xF00000,0x1300000
+mtd5                  0x1300000,0x8000000
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+usb_board_mac         1C:ED:6F:*
+usb_device_id         0x0000
+usb_device_name       USB DSL Device
+usb_manufacturer_name AVM
+usb_revision_id       0x0000
+usb_rndis_mac         1C:ED:6F:*
+webgui_pass           1234567890
+wlan_key              12345678901234567890
+wlan_ssid             FRITZ!Box#7520#XX
