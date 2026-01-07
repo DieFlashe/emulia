@@ -131,14 +131,22 @@ public class Device {
 			else
 				mapEnv.remove("urlader-version");
 
+			// emulia
+			mapEnv.put("emulia__emulator", "true");
+
 			// known
 			listEnv.addAll(mapEnv.keySet());
 			
 			// output
 //			doLog("-- Loaded " + mapEnv.size() + " environement items");
 			doLog("## " + minLen22("FTP-Identification") + dEva());
-			for (String k: getEnv())
+			for (String k: getEnv()) {
+				if (k.startsWith("debagger__user "))
+					continue;
+				if (k.startsWith("emulia__emulator "))
+					continue;
 				doLog("oo " + k);
+			}
 			
 //			for (Map.Entry<String, String> e : mapEnv.entrySet())
 //				doLog("oo " + minLen22(e.getKey()) +"'"+ e.getValue() + "'");
@@ -175,12 +183,20 @@ public class Device {
 		return null;
 	}
 	public void setEnvVar(String key, String val) {
+		if (key.equals("debagger__user"))
+			return;
+		if (key.equals("emulia__emulator"))
+			return;
 		if (!listEnv.contains(key))
 			if (Helper.allEnvVars.contains(key))
 				listEnv.add(key);
 		mapEnv.put(key, val);
 	}
 	public void delEnvVar(String key) {
+		if (key.equals("debagger__user"))
+			return;
+		if (key.equals("emulia__emulator"))
+			return;
 		mapEnv.remove(key);
 	}
 	private void addEnv(List<String> content, String key) {
@@ -194,6 +210,8 @@ public class Device {
 
 		// ontop
 		List<String> sorting = new ArrayList<String>();
+		sorting.add("debagger__user");
+		sorting.add("emulia__emulator");
 		sorting.add("DMC");
 		sorting.add("HardwareFeatures");
 		sorting.add("HWRevision");
