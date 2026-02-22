@@ -1,0 +1,38 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.12588 0x0 0x4C6409
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_days     0
+counter__run_hours    0
+counter__run_mounths  0
+counter__run_years    0
+DMC                   SL1
+HWRevision            279
+HWSubRevision         3
+HardwareFeatures      cpu=514.1.1,emmc=5.0.17.0.2
+ProductID             Fritz_Box_HW279
+SerialNumber          123456789012345
+annex                 B,pon
+autoload              yes
+bootloaderVersion     1.12588
+firmware_info         279.08.20
+firmware_version      avm
+firstfreeaddress      0x4AD80000
+flashsize             nor_size=0MB sflash_size=0KB nand_size=0MB emmc_size=1888MB
+gpon_serial           123456789012
+maca                  08:B6:57:*
+memsize               0x80000000
+mtd0                  0x0,0x0
+mtd1                  0x3B00000,0x8B00000
+mtd2                  0x0,0x2000000
+mtd3                  0x2000000,0x3000000
+mtd4                  0x8B00000,0xDB00000
+mtd5                  0xDB00000,0x75BFC000
+mtd6                  0x3000000,0x3B00000
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+tr069_passphrase      123456789012
+tr069_serial          00040E-08B657*
+webgui_pass           12345678
+wlan_key              12345678901234567890
+wlan_ssid             FRITZ!Box#5690#XX

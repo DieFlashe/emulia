@@ -1,0 +1,40 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.11521 0x0 0x640D
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_days     0
+counter__run_hours    0
+counter__run_mounths  0
+counter__run_years    0
+HWRevision            254
+HWSubRevision         2
+ProductID             Fritz_Box_HW254
+SerialNumber          123456789012345
+annex                 Ohne
+autoload              yes
+bootloaderVersion     1.11521
+firmware_info         254.07.59
+firmware_version      avm
+firstfreeaddress      0x80D41DAC
+flashsize             nor_size=0 sflash_size=1MB nand_size=128MB
+maca                  04:B4:FE:*
+macb                  04:B4:FE:*
+macdsl                04:B4:FE:*
+macwlan               04:B4:FE:*
+macwlan2              04:B4:FE:*
+memsize               0x08000000
+mtd0                  0x300000,0x1D00000
+mtd1                  0x0,0x300000
+mtd2                  0x9F000000,0x9F020000
+mtd3                  0x9F020000,0x9F090000
+mtd4                  0x9F090000,0x9F100000
+mtd5                  0x0,0x4600000
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+tr069_passphrase      123456789012
+tr069_serial          00040E-04B4FE*
+usb_board_mac         04:B4:FE:*
+usb_rndis_mac         04:B4:FE:*
+webgui_pass           12345678
+wlan_key              12345678901234567890
+wlan_ssid             FRITZ!Box#6820#XX
