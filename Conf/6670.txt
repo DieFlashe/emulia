@@ -1,0 +1,46 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.12646 0x0 0x4F6001
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_days     0
+counter__run_hours    0
+counter__run_mounths  0
+counter__run_years    0
+DMC                   RTL=y,SL1
+HWRevision            284
+HWSubRevision         3
+ProductID             Fritz_Box_HW284
+SerialNumber          123456789012345
+annex                 Kabel
+autoload              yes
+bootloaderVersion     1.12646
+firmware_info         284.07.62
+firmware_version      avm
+firstfreeaddress      0x0BC7D8C0
+maca                  60:B5:8D:*
+memsize               0x40000000
+mtd0                  0x0,0x4800000
+mtd1                  0x4800000,0x5100000
+mtd10                 0x0,0x0
+mtd11                 0xF300000,0x13B00000
+mtd12                 0x13B00000,0x14400000
+mtd13                 0x14400000,0x15700000
+mtd14                 0x15700000,0x15C00000
+mtd2                  0x5100000,0x5300000
+mtd3                  0x5300000,0x5B00000
+mtd4                  0x0,0x0
+mtd5                  0x5B00000,0xDB00000
+mtd6                  0xDB00000,0xEE00000
+mtd7                  0xEE00000,0xF300000
+mtd8                  0x0,0x0
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+tr069_passphrase      123456789012
+tr069_serial          00040E-60B58D*
+usb_device_id         0x0000
+usb_device_name       USB DSL Device
+usb_manufacturer_name AVM
+usb_revision_id       0x0000
+webgui_pass           1234567890
+wlan_key              12345678901234567890
+wlan_ssid             FRITZ!Box#6670#XX
