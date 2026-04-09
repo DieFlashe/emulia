@@ -1,0 +1,47 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.12319 0x0 0xC6409
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_days     0
+counter__run_hours    0
+counter__run_mounths  0
+counter__run_years    0
+DMC                   SL1,W1
+HWRevision            272
+HWSubRevision         62
+HardwareFeatures      cpu=389.2.0,emmc=5.0.17.0.2
+ProductID             Fritz_Box_HW272
+SerialNumber          123456789012345
+annex                 Ohne,pon
+autoload              yes
+bootloaderVersion     1.12319
+firmware_info         272.07.81
+firmware_version      avme
+firstfreeaddress      0x50500000
+flashsize             nor_size=0MB sflash_size=0KB nand_size=0MB emmc_size=1888MB
+gpon_serial           123456789012
+maca                  60:B5:8D:*
+macb                  60:B5:8D:*
+macdsl                60:B5:8D:*
+macwlan               60:B5:8D:*
+macwlan2              60:B5:8D:*
+memsize               0x40000000
+mtd0                  0x0,0x0
+mtd1                  0x3000000,0x8000000
+mtd2                  0x0,0x2000000
+mtd3                  0x2000000,0x3000000
+mtd4                  0x8000000,0xD000000
+mtd5                  0xD000000,0x75BFC000
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+tr069_passphrase      123456789012
+tr069_serial          00040E-60B58D*
+usb_board_mac         60:B5:8D:*
+usb_device_id         0x0000
+usb_device_name       USB DSL Device
+usb_manufacturer_name AVM
+usb_revision_id       0x0000
+usb_rndis_mac         60:B5:8D:*
+webgui_pass           1234567890
+wlan_key              12345678901234567890
+wlan_ssid             FRITZ!Box#5590#XX
