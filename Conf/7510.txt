@@ -2,28 +2,28 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.12163 0x0 0x46409
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_days     0
 counter__run_hours    0
+counter__run_days     0
 counter__run_mounths  0
 counter__run_years    0
 DMC                   SL1
+HardwareFeatures      nand=0xEFBA210000,cpu=0x1BF0101
 HWRevision            271
 HWSubRevision         2
-HardwareFeatures      nand=0xEFBA210000,cpu=0x1BF0101
 ProductID             Fritz_Box_HW271
 SerialNumber          123456789012345
 annex                 B
 autoload              yes
 bootloaderVersion     1.12163
+firstfreeaddress      0x4B000000
 firmware_info         271.08.20
 firmware_version      avm
-firstfreeaddress      0x4B000000
 flashsize             nor_size=0MB sflash_size=0KB nand_size=128MB
 maca                  B0:F2:08:*
 macb                  B0:F2:08:*
-macdsl                B0:F2:08:*
 macwlan               B0:F2:08:*
 macwlan2              B0:F2:08:*
+macdsl                B0:F2:08:*
 memsize               0x20000000
 mtd0                  0x0,0x2A00000
 mtd1                  0xD40000,0x1540000

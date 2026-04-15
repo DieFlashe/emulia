@@ -2,8 +2,8 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.2117 0x0 0x240D
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_days     0
 counter__run_hours    0
+counter__run_days     0
 counter__run_mounths  0
 counter__run_years    0
 HWRevision            200
@@ -15,14 +15,14 @@ autoload              yes
 bootloaderVersion     1.2117
 bootserport           tty0
 cpufrequency          720000000
+firstfreeaddress      0x810FD554
 firmware_info         128.07.15
 firmware_version      avm
-firstfreeaddress      0x810FD554
 flashsize             nor_size=0 sflash_size=16MB nand_size=0MB
 maca                  E8:DF:70:*
 macb                  E8:DF:70:*
-macdsl                E8:DF:70:*
 macwlan               E8:DF:70:*
+macdsl                E8:DF:70:*
 memsize               0x04000000
 modetty0              38400,n,8,1,hw
 modetty1              38400,n,8,1,hw
@@ -39,7 +39,7 @@ urlader-version       3117
 usb_board_mac         E8:DF:70:*
 usb_device_id         0x0000
 usb_device_name       USB DSL Device
-usb_manufacturer_name AVM
+usb_manufacturer_name  AVM
 usb_revision_id       0x0000
 usb_rndis_mac         E8:DF:70:*
 wlan_key              12345678

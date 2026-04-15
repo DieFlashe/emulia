@@ -2,8 +2,8 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.3031 0x0 0x4640D
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_days     0
 counter__run_hours    0
+counter__run_days     0
 counter__run_mounths  0
 counter__run_years    0
 HWRevision            224
@@ -13,15 +13,15 @@ SerialNumber          123456789012345
 annex                 A
 autoload              yes
 bootloaderVersion     1.3031
+firstfreeaddress      0x1CE00000
 firmware_info         152.07.18
 firmware_version      avme
-firstfreeaddress      0x1CE00000
 flashsize             nor_size=0MB sflash_size=0KB nand_size=128MB
 maca                  9C:C7:A6:*
 macb                  9C:C7:A6:*
-macdsl                9C:C7:A6:*
 macwlan               9C:C7:A6:*
 macwlan2              9C:C7:A6:*
+macdsl                9C:C7:A6:*
 memsize               0x20000000
 modulemem             11575126
 mtd0                  0x820000,0x3820000
@@ -38,7 +38,7 @@ tr069_serial          00040E-9CC7A6*
 usb_board_mac         9C:C7:A6:*
 usb_device_id         0x0000
 usb_device_name       USB DSL Device
-usb_manufacturer_name AVM
+usb_manufacturer_name  AVM
 usb_revision_id       0x0000
 usb_rndis_mac         9C:C7:A6:*
 webgui_pass           123456789

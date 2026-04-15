@@ -2,22 +2,22 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.12588 0x0 0x4C6409
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_days     0
 counter__run_hours    0
+counter__run_days     0
 counter__run_mounths  0
 counter__run_years    0
 DMC                   SL1
+HardwareFeatures      cpu=514.1.1,emmc=5.0.17.0.2
 HWRevision            279
 HWSubRevision         3
-HardwareFeatures      cpu=514.1.1,emmc=5.0.17.0.2
 ProductID             Fritz_Box_HW279
 SerialNumber          123456789012345
 annex                 B,pon
 autoload              yes
 bootloaderVersion     1.12588
+firstfreeaddress      0x4AD80000
 firmware_info         279.08.20
 firmware_version      avm
-firstfreeaddress      0x4AD80000
 flashsize             nor_size=0MB sflash_size=0KB nand_size=0MB emmc_size=1888MB
 gpon_serial           123456789012
 maca                  08:B6:57:*

@@ -2,8 +2,8 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.947 0x0 0x340D
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_days     0
 counter__run_hours    0
+counter__run_days     0
 counter__run_mounths  0
 counter__run_years    0
 HWRevision            156
@@ -15,15 +15,15 @@ autoload              yes
 bootloaderVersion     1.947
 bootserport           tty0
 cpufrequency          500000000
+firstfreeaddress      0x810C9834
 firmware_info         84.06.88
 firmware_version      avm
-firstfreeaddress      0x810C9834
 flashsize             0x01000000
 maca                  C0:25:06:*
 macb                  C0:25:06:*
-macdsl                C0:25:06:*
 macwlan               C0:25:06:*
 macwlan2              C0:25:06:*
+macdsl                C0:25:06:*
 memsize               0x08000000
 modetty0              38400,n,8,1,hw
 modetty1              38400,n,8,1,hw
@@ -42,7 +42,7 @@ urlader-version       1947
 usb_board_mac         C0:25:06:*
 usb_device_id         0x0000
 usb_device_name       USB DSL Device
-usb_manufacturer_name AVM
+usb_manufacturer_name  AVM
 usb_revision_id       0x0000
 usb_rndis_mac         C0:25:06:*
 wlan_key              1234567890123456

@@ -2,29 +2,29 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.11672 0x0 0xC6409
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_days     0
 counter__run_hours    0
+counter__run_days     0
 counter__run_mounths  0
 counter__run_years    0
 DMC                   SL1
+HardwareFeatures      cpu=390.2.0,emmc=5.0.17.0.2
 HWRevision            261
 HWSubRevision         2
-HardwareFeatures      cpu=390.2.0,emmc=5.0.17.0.2
 ProductID             Fritz_Box_HW261
 SerialNumber          123456789012345
 annex                 Ohne
 autoload              yes
 bootloaderVersion     1.11672
+firstfreeaddress      0x50500000
 firmware_info         261.08.10
 firmware_version      avme
-firstfreeaddress      0x50500000
 flashsize             nor_size=0MB sflash_size=0KB nand_size=0MB emmc_size=1888MB
 maca                  B0:F2:08:*
 macb                  B0:F2:08:*
-macdsl                B0:F2:08:*
 macwlan               B0:F2:08:*
 macwlan2              B0:F2:08:*
 macwlan3              B0:F2:08:*
+macdsl                B0:F2:08:*
 memsize               0x40000000
 mtd0                  0x0,0x0
 mtd1                  0x3000000,0x8000000
@@ -38,7 +38,7 @@ tr069_passphrase      123456789012
 tr069_serial          00040E-B0F208*
 usb_device_id         0x0000
 usb_device_name       USB DSL Device
-usb_manufacturer_name AVM
+usb_manufacturer_name  AVM
 usb_revision_id       0x0000
 usb_rndis_mac         B0:F2:08:*
 webgui_pass           12345678

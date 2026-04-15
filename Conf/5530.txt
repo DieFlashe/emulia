@@ -2,29 +2,29 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.11990 0x0 0x46409
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_days     0
 counter__run_hours    0
+counter__run_days     0
 counter__run_mounths  0
 counter__run_years    0
 DMC                   SL1
+HardwareFeatures      spinand=0x98E240,cpu=0x10003113
 HWRevision            257
 HWSubRevision         5
-HardwareFeatures      spinand=0x98E240,cpu=0x10003113
 ProductID             Fritz_Box_HW257
 SerialNumber          123456789012345
 annex                 Ohne,aon
 autoload              yes
 bootloaderVersion     1.11990
+firstfreeaddress      0x60440BA0,0x20000000
 firmware_info         257.08.02
 firmware_version      avm
-firstfreeaddress      0x60440BA0,0x20000000
 flashsize             nor_size=0MB sflash_size=0KB nand_size=128MB
 gpon_serial           123456789012
 maca                  D4:24:DD:*
 macb                  D4:24:DD:*
-macdsl                D4:24:DD:*
 macwlan               D4:24:DD:*
 macwlan2              D4:24:DD:*
+macdsl                D4:24:DD:*
 memsize               0x40000000
 mtd0                  0x0,0x0
 mtd1                  0x980000,0x3B80000
@@ -39,7 +39,7 @@ tr069_serial          00040E-D424DD*
 usb_board_mac         D4:24:DD:*
 usb_device_id         0x0000
 usb_device_name       USB DSL Device
-usb_manufacturer_name AVM
+usb_manufacturer_name  AVM
 usb_revision_id       0x0000
 usb_rndis_mac         D4:24:DD:*
 webgui_pass           1234567890

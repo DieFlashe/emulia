@@ -2,27 +2,27 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.11581 0x0 0x46409
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_days     0
 counter__run_hours    0
+counter__run_days     0
 counter__run_mounths  0
 counter__run_years    0
+HardwareFeatures      nand=0xC2F1809502,cpu=0x979
 HWRevision            236
 HWSubRevision         1
-HardwareFeatures      nand=0xC2F1809502,cpu=0x979
 ProductID             Fritz_Box_HW236
 SerialNumber          123456789012345
 annex                 A
 autoload              yes
 bootloaderVersion     1.11581
+firstfreeaddress      0x882540E8
 firmware_info         164.08.02
 firmware_version      avme
-firstfreeaddress      0x882540E8
 flashsize             nor_size=0MB sflash_size=0KB nand_size=128MB
 maca                  44:4E:6D:*
 macb                  44:4E:6D:*
-macdsl                44:4E:6D:*
 macwlan               44:4E:6D:*
 macwlan2              44:4E:6D:*
+macdsl                44:4E:6D:*
 memsize               0x10000000
 mtd0                  0x0,0x2C00000
 mtd1                  0xB00000,0xF00000
@@ -37,7 +37,7 @@ tr069_serial          00040E-444E6D*
 usb_board_mac         44:4E:6D:*
 usb_device_id         0x0000
 usb_device_name       USB DSL Device
-usb_manufacturer_name AVM
+usb_manufacturer_name  AVM
 usb_revision_id       0x0000
 usb_rndis_mac         44:4E:6D:*
 webgui_pass           123456789

@@ -2,28 +2,28 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.10286 0x0 0x46409
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_days     0
 counter__run_hours    0
+counter__run_days     0
 counter__run_mounths  0
 counter__run_years    0
 DMC                   SL1
+HardwareFeatures      nand=0xC2F1809502,cpu=0x979
 HWRevision            244
 HWSubRevision         1
-HardwareFeatures      nand=0xC2F1809502,cpu=0x979
 ProductID             Fritz_Box_HW244
 SerialNumber          123456789012345
 annex                 Ohne
 autoload              yes
 bootloaderVersion     1.10286
+firstfreeaddress      0x8824E668
 firmware_info         172.07.58
 firmware_version      avm
-firstfreeaddress      0x8824E668
 flashsize             nor_size=0MB sflash_size=0KB nand_size=128MB
 maca                  DC:39:6F:*
 macb                  DC:39:6F:*
-macdsl                DC:39:6F:*
 macwlan               DC:39:6F:*
 macwlan2              DC:39:6F:*
+macdsl                DC:39:6F:*
 memsize               0x10000000
 mtd0                  0x0,0x2C00000
 mtd1                  0xB00000,0xF00000

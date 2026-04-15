@@ -2,8 +2,8 @@ ftp__banner           ADAM2 FTP Server ready
 ftp__system           AVM EVA Version 1.3614 0x0 0xF6001
 counter__reboot_major 0
 counter__reboot_minor 0
-counter__run_days     0
 counter__run_hours    0
+counter__run_days     0
 counter__run_mounths  0
 counter__run_years    0
 DMC                   RTL=y
@@ -14,14 +14,14 @@ SerialNumber          123456789012345
 annex                 Kabel
 autoload              yes
 bootloaderVersion     1.3614
+firstfreeaddress      0x3D3C4C00
 firmware_info         161.08.21
 firmware_version      avm
-firstfreeaddress      0x3D3C4C00
 maca                  74:42:7F:*
 macb                  74:42:7F:*
-macdsl                74:42:7F:*
 macwlan               74:42:7F:*
 macwlan2              74:42:7F:*
+macdsl                74:42:7F:*
 memsize               0x40000000
 mtd0                  0x0,0x4800000
 mtd1                  0x4800000,0x5100000
@@ -44,7 +44,7 @@ tr069_serial          00040E-74427F*
 usb_board_mac         74:42:7F:*
 usb_device_id         0x0000
 usb_device_name       USB DSL Device
-usb_manufacturer_name AVM
+usb_manufacturer_name  AVM
 usb_revision_id       0x0000
 usb_rndis_mac         74:42:7F:*
 webgui_pass           123456789
