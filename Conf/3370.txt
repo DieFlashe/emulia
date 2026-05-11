@@ -1,0 +1,48 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.1475 0x0 0x741D
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_hours    0
+counter__run_days     0
+counter__run_mounths  0
+counter__run_years    0
+HWRevision            175
+HWSubRevision         5
+ProductID             Fritz_Box_3370
+SerialNumber          0000000000000000
+annex                 B
+autoload              yes
+bootloaderVersion     1.1475
+bootserport           tty0
+cpufrequency          500000000
+firstfreeaddress      0x81113AB4
+firmware_info         103.06.56
+firmware_version      avm
+flashsize             nor_size=0MB sflash_size=256KB nand_size=128MB
+maca                  08:96:D7:*
+macb                  08:96:D7:*
+macwlan               08:96:D7:*
+macdsl                08:96:D7:*
+memsize               0x08000000
+modetty0              38400,n,8,1,hw
+modetty1              38400,n,8,1,hw
+mtd0                  0x400000,0x3400000
+mtd1                  0x0,0x400000
+mtd2                  0x0,0x20000
+mtd3                  0x20000,0x30000
+mtd4                  0x30000,0x40000
+mtd5                  0x0,0x200000
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+req_fullrate_freq     250000000
+sysfrequency          250000000
+tr069_passphrase      123456789012
+tr069_serial          00040E-0896D7*
+urlader-version       2475
+usb_board_mac         08:96:D7:*
+usb_device_id         0x0000
+usb_device_name       USB DSL Device
+usb_manufacturer_name  AVM
+usb_revision_id       0x0000
+usb_rndis_mac         08:96:D7:*
+wlan_key              1234567890123456
