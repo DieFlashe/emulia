@@ -30,6 +30,7 @@ public class Main {
 		i = confFile.lastIndexOf(".");
 		if (i>0)
 			confFile=confFile.substring(0,i);
+		confFile = Helper.chkConfigFile(confFile);
 		Helper.setConfigFile(confFile + ".txt");
 
 		final Device device = new Device(true);		// reload env on program start

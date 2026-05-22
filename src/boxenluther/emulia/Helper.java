@@ -1,8 +1,11 @@
 package boxenluther.emulia;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -57,8 +60,8 @@ public final class Helper {
 	}
 	static public void doLog(String tag, String txt) {
 		String now = "";
-		if (txt.length()>0)
-			now = new SimpleDateFormat("HH:mm:ss.SSS").format(Calendar.getInstance().getTime()) + " ";	
+		if (txt.length() > 0)
+			now = new SimpleDateFormat("HH:mm:ss.SSS").format(Calendar.getInstance().getTime()) + " ";
 //			now = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss.SSS").format(Calendar.getInstance().getTime()) + " ";
 
 		if (tag == null)
@@ -71,9 +74,9 @@ public final class Helper {
 		doWriteLog(msg);
 	}
 
-	
+
 	static private String outPath = null;
-	static public String getOutPath() { 
+	static public String getOutPath() {
 		if (outPath == null)
 			outPath = getWorkDir() + File.separator + "Bins" + File.separator;
 		return outPath;
@@ -81,16 +84,16 @@ public final class Helper {
 
 
 	static private String cfgPath = null;
-	static public String getCfgPath() { 
-		if (cfgPath  == null)
-			cfgPath  = getWorkDir() + File.separator + "Conf";
-		return cfgPath ;
+	static public String getCfgPath() {
+		if (cfgPath == null)
+			cfgPath = getWorkDir() + File.separator + "Conf";
+		return cfgPath;
 	}
 	static private String npPath = null;
-	static public String getNpPath() { 
-		if (npPath  == null)
-			npPath  = getCfgPath() + File.separator + "np";
-		return npPath ;
+	static public String getNpPath() {
+		if (npPath == null)
+			npPath = getCfgPath() + File.separator + "np";
+		return npPath;
 	}
 
 	static private String configFile = null;
@@ -101,11 +104,44 @@ public final class Helper {
 	}
 	static public void setConfigFile(String fileName) {
 		configFile = getNpPath() + File.separator + fileName;
-		if(!new File(configFile).exists())
+		if (!new File(configFile).exists())
 			configFile = getCfgPath() + File.separator + fileName;
 	}
+	static public String chkConfigFile(String fileName) {
+		String retFile = fileName;
 
-	
+		String tmpFile = getNpPath() + File.separator + retFile;
+		if (!new File(tmpFile).exists())
+			tmpFile = getCfgPath() + File.separator + retFile;
+		if (!new File(tmpFile).exists())
+			return retFile;
+		File f = new File(tmpFile);
+		if (!f.canRead())
+			return retFile;
+
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(tmpFile)));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				if (line.length() <= 5)
+					break;
+				if (!line.toUpperCase().startsWith("LINK:"))
+					break;
+				retFile = line.substring(5);
+				break;
+			}
+		} catch (Exception e) {
+		}
+		try {
+			br.close();
+		} catch (Exception e) {
+		}
+
+		return retFile;
+	}
+
+
 	static public List<String> allEnvVars = Arrays.asList(
 		"annex",
 		"autoload",
