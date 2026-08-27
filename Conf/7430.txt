@@ -1,0 +1,53 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.2589 0x0 0x47409
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_hours    0
+counter__run_days     0
+counter__run_mounths  0
+counter__run_years    0
+HWRevision            218
+HWSubRevision         3
+ProductID             Fritz_Box_HW218
+SerialNumber          0000000000000000
+annex                 B
+autoload              yes
+bootloaderVersion     1.2589
+bootserport           tty0
+country               *
+cpufrequency          500000000
+firstfreeaddress      0x811FB58C
+firmware_info         146.07.31
+firmware_version      avm
+flashsize             nor_size=0MB sflash_size=0KB nand_size=128MB
+language              *
+linux_fs_start        *
+maca                  F0:B0:14:*
+macb                  F0:B0:14:*
+macwlan               F0:B0:14:*
+macdsl                F0:B0:14:*
+memsize               0x08000000
+modetty0              38400,n,8,1,hw
+modetty1              38400,n,8,1,hw
+mtd0                  0x840000,0x3840000
+mtd1                  0x440000,0x840000
+mtd2                  0x0,0x40000
+mtd3                  0x40000,0x440000
+mtd4                  0x0,0x200000
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+provider              7430_ewe_07_2017
+req_fullrate_freq     250000000
+sysfrequency          250000000
+tr069_passphrase      123456789012
+tr069_serial          00040E-F0B014*
+urlader-version       3589
+usb_board_mac         F0:B0:14:*
+usb_device_id         0x0000
+usb_device_name       USB DSL Device
+usb_manufacturer_name  AVM
+usb_revision_id       0x0000
+usb_rndis_mac         F0:B0:14:*
+webgui_pass           1234567890
+wlan_key              12345678901234567890
+wlan_ssid             FRITZ!Box#7430#XX
