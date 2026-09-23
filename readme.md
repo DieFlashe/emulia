@@ -28,6 +28,10 @@ If you like the program, I would be happy to receive a donation.
  - Session log files are saved to `./Logs/`.
  - Transmitted blobs are saved to `./Bins/`.
 
+### Insights
+ - Collected [Environments](https://github.com/DieFlashe/emulia/tree/trunk/Conf)
+ - Known [HWSubRevisions](hwsubr.md)
+
 ### Links
  - [Sources](https://github.com/DieFlashe/emulia)
  - [Discussions](https://github.com/orgs/DieFlashe/discussions)
