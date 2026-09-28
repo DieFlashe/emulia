@@ -170,6 +170,9 @@ public class Searcher extends Thread {
 				lastRemotes.put(remote, now);
 
 				// requestion
+				if (new String(bufferRX, 0, packetRX.getLength()).equals("AVMfritz")) {
+					doLog("XX Detected Slint recovery");
+				} else {
 				final byte[] addressBYT = new byte[] { bufferRX[8], bufferRX[9], bufferRX[10], bufferRX[11] };
 				final InetAddress addressREQ = InetAddress.getByAddress(addressBYT);
 				doLog("XX Requested ip " + addressREQ.getHostAddress());
@@ -184,6 +187,8 @@ public class Searcher extends Thread {
 				bufferTX[8] = (byte) barrayLOC[3];
 
 				doLog(">> Replying with IP " + addressLOC.getHostAddress().toString());
+				}
+			
 				DatagramPacket sendPacket = new DatagramPacket(bufferTX, bufferTX.length, packetRX.getAddress(), broadcastPort);
 				socketRX.send(sendPacket);
 			} catch (Exception e) {
