@@ -166,8 +166,8 @@ public class Searcher extends Thread {
 		doLog("-- Waiting for broadcasts on " + broadcastPort + "/udp");
 		String nifs = "";
 		for (NetworkInterface nif : interfaces)
-			nifs += " " + "<" + nif.getName() + ">";
-		doLog("-- Using ifs: [0.0.0.0]" + nifs);
+			nifs += " " + "{" + nif.getName() + "}";
+		doLog("-- Using ifs: (0.0.0.0)" + nifs);
 
 		// looping
 		while (running) {
@@ -213,9 +213,11 @@ public class Searcher extends Thread {
 					bufferTX[8] = (byte) 0;
 
 				} else {
+					doLog("XX Detected Adam2 recovery");
+
 					final byte[] addressBYT = new byte[] { bufferRX[8], bufferRX[9], bufferRX[10], bufferRX[11] };
 					final InetAddress addressREQ = InetAddress.getByAddress(addressBYT);
-					doLog("XX Requested ip " + addressREQ.getHostAddress());
+					doLog("XX Requested ip " + Helper.beautifyIP(addressREQ.getHostAddress()));
 
 					// answering
 					addressLOC = getEndpoint(remote, addresses);
