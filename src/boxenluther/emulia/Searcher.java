@@ -173,20 +173,20 @@ public class Searcher extends Thread {
 				if (new String(bufferRX, 0, packetRX.getLength()).equals("AVMfritz")) {
 					doLog("XX Detected Slint recovery");
 				} else {
-				final byte[] addressBYT = new byte[] { bufferRX[8], bufferRX[9], bufferRX[10], bufferRX[11] };
-				final InetAddress addressREQ = InetAddress.getByAddress(addressBYT);
-				doLog("XX Requested ip " + addressREQ.getHostAddress());
-
-				// answering
-				final InetAddress addressLOC = getEndpoint(remote, addresses);
-
-				byte[] barrayLOC = addressLOC.getAddress();
-				bufferTX[11] = (byte) barrayLOC[0];
-				bufferTX[10] = (byte) barrayLOC[1];
-				bufferTX[9] = (byte) barrayLOC[2];
-				bufferTX[8] = (byte) barrayLOC[3];
-
-				doLog(">> Replying with IP " + addressLOC.getHostAddress().toString());
+					final byte[] addressBYT = new byte[] { bufferRX[8], bufferRX[9], bufferRX[10], bufferRX[11] };
+					final InetAddress addressREQ = InetAddress.getByAddress(addressBYT);
+					doLog("XX Requested ip " + addressREQ.getHostAddress());
+	
+					// answering
+					final InetAddress addressLOC = getEndpoint(remote, addresses);
+	
+					byte[] barrayLOC = addressLOC.getAddress();
+					bufferTX[11] = (byte) barrayLOC[0];
+					bufferTX[10] = (byte) barrayLOC[1];
+					bufferTX[9] = (byte) barrayLOC[2];
+					bufferTX[8] = (byte) barrayLOC[3];
+	
+					doLog(">> Replying with IP " + addressLOC.getHostAddress().toString());
 				}
 			
 				DatagramPacket sendPacket = new DatagramPacket(bufferTX, bufferTX.length, packetRX.getAddress(), broadcastPort);
