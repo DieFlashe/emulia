@@ -142,6 +142,67 @@ public final class Helper {
 	}
 
 
+	static public String beautifyIP(String ip) {
+
+		// ignore ipv4
+		if (ip.indexOf('.') >= 0)
+			return ip;
+
+		// interface scope
+		String scope = "";
+		int p = ip.indexOf('%');
+		if (p >= 0) {
+			scope = ip.substring(p);
+			ip = ip.substring(0, p);
+		}
+
+		String[] groups = ip.split(":", -1);
+
+		// leading zeros
+		for (int i = 0; i < groups.length; i++) {
+			if (groups[i].isEmpty())
+				continue;
+			groups[i] = Integer.toHexString(Integer.parseInt(groups[i], 16));
+		}
+
+		// zero groups
+		int bestStart = -1, bestLen = 0;
+		for (int i = 0; i < groups.length;) {
+			if (!groups[i].equals("0")) {
+				i++;
+				continue;
+			}
+
+			int start = i;
+			while (i < groups.length && groups[i].equals("0"))
+				i++;
+
+			if (i - start > bestLen) {
+				bestStart = start;
+				bestLen = i - start;
+			}
+		}
+
+		// double colon
+		if (bestLen < 2)
+			bestStart = -1;
+
+		StringBuilder result = new StringBuilder();
+		for (int i = 0; i < groups.length; i++) {
+			if (i == bestStart) {
+				result.append("::");
+				i += bestLen - 1;
+			} else {
+				if (result.length() > 0 && result.charAt(result.length() - 1) != ':')
+					result.append(':');
+				result.append(groups[i]);
+			}
+		}
+
+		return result + scope;
+	}
+
+
 	static public List<String> allEnvVars = Arrays.asList(
 		"annex",
 		"autoload",
@@ -234,6 +295,6 @@ public final class Helper {
 		"wlan_key",
 		"wlan_ssid"
 	);
-	 
-	
+
+
 }

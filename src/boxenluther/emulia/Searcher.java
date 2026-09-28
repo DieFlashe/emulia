@@ -83,7 +83,7 @@ public class Searcher extends Thread {
 		}
 
 		for (Iterator<InetAddress> i = addresses.iterator(); i.hasNext();)
-			doLog("-- Using IP: " + i.next().getHostAddress().toString());
+			doLog("-- Using IP: " + Helper.beautifyIP(i.next().getHostAddress().toString()));
 		return addresses;
 	}
 
@@ -157,14 +157,14 @@ public class Searcher extends Thread {
 				packetRX = new DatagramPacket(bufferRX, bufferRX.length);
 				socketRX.receive(packetRX);
 				doLog(null, ""); // empty line
-				doLog("<< Request from " + packetRX.getAddress().getHostAddress() + ":" + packetRX.getPort());
+				doLog("<< Request from " + Helper.beautifyIP(packetRX.getAddress().getHostAddress()) + ":" + packetRX.getPort());
 
 				// ratelimit
 				remote = packetRX.getAddress().getHostAddress();
 				now = System.currentTimeMillis();
 				lastAnswer = lastRemotes.get(remote);
 				if (lastAnswer != null && lastAnswer + 1000 > now) {
-					doLog("OO Ratelimit hit for " + packetRX.getAddress().getHostAddress());
+					doLog("OO Ratelimit hit for " + Helper.beautifyIP(packetRX.getAddress().getHostAddress()));
 					continue;
 				}
 				lastRemotes.put(remote, now);
