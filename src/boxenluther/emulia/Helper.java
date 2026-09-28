@@ -142,6 +142,12 @@ public final class Helper {
 	}
 
 
+	static public String beautifyIP(String ip, Integer port) {
+		if (ip.indexOf('.') >= 0)
+			return ip + ":" + port;
+		else
+			return "[" + beautifyIP(ip) + "]" + ":" + port;
+	}
 	static public String beautifyIP(String ip) {
 
 		// ignore ipv4

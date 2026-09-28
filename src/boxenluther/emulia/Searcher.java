@@ -157,7 +157,7 @@ public class Searcher extends Thread {
 				packetRX = new DatagramPacket(bufferRX, bufferRX.length);
 				socketRX.receive(packetRX);
 				doLog(null, ""); // empty line
-				doLog("<< Request from " + Helper.beautifyIP(packetRX.getAddress().getHostAddress()) + ":" + packetRX.getPort());
+				doLog("<< Request from " + Helper.beautifyIP(packetRX.getAddress().getHostAddress(), packetRX.getPort()));
 
 				// ratelimit
 				remote = packetRX.getAddress().getHostAddress();
