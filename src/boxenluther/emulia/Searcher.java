@@ -129,7 +129,7 @@ public class Searcher extends Thread {
 		// ff02::1
 		InetAddress mcgroup = null;
 		try {
-			mcgroup = InetAddress.getByAddress(new byte[]{(byte) 0xff, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1});
+			mcgroup = InetAddress.getByAddress(new byte[] { (byte) 0xff, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 });
 		} catch (Exception e) {}
 
 		doLog("-- Waiting for broadcasts on " + broadcastPort + "/udp");
@@ -142,7 +142,7 @@ public class Searcher extends Thread {
 		while (running) {
 			try {
 				// listening
-				if (socketRX == null) { 
+				if (socketRX == null) {
 					socketRX = new MulticastSocket(broadcastPort);
 					for (NetworkInterface nif : interfaces) {
 						try {
@@ -172,23 +172,29 @@ public class Searcher extends Thread {
 				// requestion
 				if (new String(bufferRX, 0, packetRX.getLength()).equals("AVMfritz")) {
 					doLog("XX Detected Slint recovery");
+
+					bufferTX[11] = (byte) 0;
+					bufferTX[10] = (byte) 0;
+					bufferTX[9] = (byte) 0;
+					bufferTX[8] = (byte) 0;
+
 				} else {
 					final byte[] addressBYT = new byte[] { bufferRX[8], bufferRX[9], bufferRX[10], bufferRX[11] };
 					final InetAddress addressREQ = InetAddress.getByAddress(addressBYT);
 					doLog("XX Requested ip " + addressREQ.getHostAddress());
-	
+
 					// answering
 					final InetAddress addressLOC = getEndpoint(remote, addresses);
-	
+
 					byte[] barrayLOC = addressLOC.getAddress();
 					bufferTX[11] = (byte) barrayLOC[0];
 					bufferTX[10] = (byte) barrayLOC[1];
 					bufferTX[9] = (byte) barrayLOC[2];
 					bufferTX[8] = (byte) barrayLOC[3];
-	
+
 					doLog(">> Replying with IP " + addressLOC.getHostAddress().toString());
 				}
-			
+
 				DatagramPacket sendPacket = new DatagramPacket(bufferTX, bufferTX.length, packetRX.getAddress(), broadcastPort);
 				socketRX.send(sendPacket);
 			} catch (Exception e) {
