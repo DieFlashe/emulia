@@ -38,7 +38,7 @@ public class Worker extends Thread {
 	}
 	private String myIdString() {
 		try {
-			return "T" + ( (Long)myIdMethod().invoke(this) ).toString();
+			return "T" + ((Long) myIdMethod().invoke(this)).toString();
 		} catch (Exception e) {}
 		return null;
 	}
@@ -50,7 +50,7 @@ public class Worker extends Thread {
 
 	public Worker(Device device, Socket socket) {
 		super();
-		if (device!=null)
+		if (device != null)
 			this.device = device;
 		else
 			this.device = new Device();
@@ -68,7 +68,7 @@ public class Worker extends Thread {
 	final private Device device;
 	final private String validUser = "adam2";
 	final private String validPass = "adam2";
-	
+
 	private String currentUser = "";
 	private String currentMode = "BINARY";
 	private String currentMedia = "FLASH";
@@ -88,30 +88,27 @@ public class Worker extends Thread {
 	private void datClose() {
 		try {
 			datWriter.close();
-		} catch (Exception e) {
-		}
+		} catch (Exception e) {}
 		datWriter = null;
 		try {
 			dataSocket.close();
-		} catch (Exception e) {
-		}
+		} catch (Exception e) {}
 		dataSocket = null;
 		try {
 			datServer.close();
-		} catch (Exception e) {
-		}
+		} catch (Exception e) {}
 		datServer = null;
 		doLog("-- DAT closed");
 	}
 
 	private void fileTX(String arg) {
 		String fileName = arg.toLowerCase();
-		
+
 		if (dataSocket == null) {
 			sendLine(501, "Error, no transfer mode");
 			return;
 		}
-		
+
 		switch (currentMode) {
 			case "BINARY":
 				break;
@@ -134,7 +131,7 @@ public class Worker extends Thread {
 				break;
 		}
 
-		if (content==null) {
+		if (content == null) {
 			if (!new File(fileName).exists()) {
 				sendLine(501, "Error, file does not exist");
 				return;
@@ -325,7 +322,7 @@ public class Worker extends Thread {
 
 			// crc with filler FFs
 			for (int i = 0; i < filler; i++)
-				crc.update((byte) 255);					
+				crc.update((byte) 255);
 
 			doLog("%% imgSize :=" + dottedNum(imgSize));
 			doLog("%% mtdSize :=" + dottedNum(mtdSize));
@@ -343,14 +340,14 @@ public class Worker extends Thread {
 		int insertAt;
 		String ret = " " + arg;
 		insertAt = 7;
-		if (ret.length()>insertAt)
-			ret=ret.substring(0, ret.length()-insertAt+1) +"."+ ret.substring(ret.length()-insertAt+1);
+		if (ret.length() > insertAt)
+			ret = ret.substring(0, ret.length() - insertAt + 1) + "." + ret.substring(ret.length() - insertAt + 1);
 		insertAt = 4;
-		if (ret.length()>insertAt)
-			ret=ret.substring(0, ret.length()-insertAt+1) +"."+ ret.substring(ret.length()-insertAt+1);
-		while (ret.length()<12)
+		if (ret.length() > insertAt)
+			ret = ret.substring(0, ret.length() - insertAt + 1) + "." + ret.substring(ret.length() - insertAt + 1);
+		while (ret.length() < 12)
 			ret = " " + ret;
-		return ret;		
+		return ret;
 	}
 
 	public void run() {
@@ -422,16 +419,15 @@ public class Worker extends Thread {
 							sendLine(device.getEnvVar(arg));
 							sendLine("");
 							sendLine(200, "GETENV command successful");
-						}
-						else
+						} else
 							sendLine(501, "environment variable not set");
 						break;
 					case "SETENV":
 						String key = arg;
 						String val = "";
 						final int i = arg.indexOf(' ');
-						if (i!=-1) {
-							key = arg.substring(0,i).trim();
+						if (i != -1) {
+							key = arg.substring(0, i).trim();
 							val = arg.substring(i).trim();
 						}
 						if (device.hadEnvVar(key) || Helper.allEnvVars.contains(key)) {
@@ -506,7 +502,7 @@ public class Worker extends Thread {
 					case "V":
 					case "VER":
 					case "VERSION":
-						sendLine(200, "Emulia v1.0"); 
+						sendLine(200, "Emulia v1.0");
 						break;
 //					case "DEBUG":
 //						debugging=!debugging;
@@ -549,7 +545,7 @@ public class Worker extends Thread {
 			doLog("XX CTL failed: " + e.getMessage());
 //			e.printStackTrace();
 		}
-	
+
 		try {
 			ctlOutWriter.close();
 		} catch (Exception e) {}

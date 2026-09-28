@@ -16,20 +16,20 @@ public class Main {
 		String confFile = "_Generic";
 		if (args != null && args.length > 0)
 			confFile = args[0];
-	
+
 //TODO  load custom device-config on start -> discarded -> use args + collected ^^
 //		confFile = "DEVICE";	//DEVEL
 
 		int i = -1;
 		i = confFile.lastIndexOf("\\");
-		if (i>0)
-			confFile=confFile.substring(i);
+		if (i > 0)
+			confFile = confFile.substring(i);
 		i = confFile.lastIndexOf("/");
-		if (i>0)
-			confFile=confFile.substring(i);
+		if (i > 0)
+			confFile = confFile.substring(i);
 		i = confFile.lastIndexOf(".");
-		if (i>0)
-			confFile=confFile.substring(0,i);
+		if (i > 0)
+			confFile = confFile.substring(0, i);
 		confFile = Helper.chkConfigFile(confFile);
 		Helper.setConfigFile(confFile + ".txt");
 
@@ -55,11 +55,11 @@ public class Main {
 			try {
 				Socket socket = listener.accept();
 				doLog("<< Client connected from " + socket.getInetAddress().getHostAddress() + ":" + socket.getPort());
-				new Worker(device,socket).start();
+				new Worker(device, socket).start();
 			} catch (Exception e) {
 				doLog("XX Error creating worker: " + e.toString());
 				e.printStackTrace();
-				running=false;
+				running = false;
 			}
 		}
 
