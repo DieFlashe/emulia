@@ -87,6 +87,25 @@ public class Searcher extends Thread {
 		return addresses;
 	}
 
+	private List<NetworkInterface> allLLinterfaces() {
+		List<NetworkInterface> interfaces = new ArrayList<>();
+		try {
+			for (Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces(); e.hasMoreElements();) {
+				NetworkInterface nif = e.nextElement();
+				if (nif.isUp() && nif.supportsMulticast()) {
+					for (Enumeration<InetAddress> ips = nif.getInetAddresses(); ips.hasMoreElements();) {
+						InetAddress ip = ips.nextElement();
+						if (ip instanceof Inet6Address && ip.isLinkLocalAddress()) {
+							interfaces.add(nif);
+							break;
+						}
+					}
+				}
+			}
+		} catch (Exception e) {}
+		return interfaces;
+	}
+
 	@Override
 	public void run() {
 		final int broadcastPort = 5035;
@@ -105,9 +124,21 @@ public class Searcher extends Thread {
 		Long lastAnswer = null;
 
 		List<InetAddress> addresses = allEndpoints();
+		List<NetworkInterface> interfaces = allLLinterfaces();
+
+		// ff02::1
+		InetAddress mcgroup = null;
+		try {
+			mcgroup = InetAddress.getByAddress(new byte[]{(byte) 0xff, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1});
+		} catch (Exception e) {}
+
+		doLog("-- Waiting for broadcasts on " + broadcastPort + "/udp");
+		String nifs = "";
+		for (NetworkInterface nif : interfaces)
+			nifs += " " + "<" + nif.getName() + ">";
+		doLog("-- Using ifs: [0.0.0.0]" + nifs);
 
 		// looping
-		doLog("-- Waiting for broadcasts on " + broadcastPort + "/udp");
 		while (running) {
 			try {
 				// listening
