@@ -142,8 +142,18 @@ public class Searcher extends Thread {
 		while (running) {
 			try {
 				// listening
-				if (socketRX == null)
+				if (socketRX == null) { 
 					socketRX = new MulticastSocket(broadcastPort);
+					for (NetworkInterface nif : interfaces) {
+						try {
+							socketRX.joinGroup(new java.net.InetSocketAddress(mcgroup, broadcastPort), nif);
+						} catch (Exception e) {
+							doLog("XX Listening failure: " + e.toString());
+						}
+					}
+				}
+
+				// receiving
 				packetRX = new DatagramPacket(bufferRX, bufferRX.length);
 				socketRX.receive(packetRX);
 				doLog(null, ""); // empty line
