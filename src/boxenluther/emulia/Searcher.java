@@ -25,6 +25,9 @@ public class Searcher extends Thread {
 	}
 
 	private InetAddress getEndpoint(final String remote, final List<InetAddress> addresses) {
+		if (!remote.contains("."))
+			return null;
+
 		String subnet = remote;
 		InetAddress current = null;
 		// /24
@@ -52,6 +55,33 @@ public class Searcher extends Thread {
 		current = null;
 		try {
 			current = InetAddress.getByAddress(new byte[] { (byte) 192, (byte) 168, (byte) 178, (byte) 1 });
+		} catch (Exception e) {}
+		doLog("XX Fallback to " + current.getHostAddress().toString());
+		return current;
+	}
+	private InetAddress getEndpoint(final InetAddress address, final List<NetworkInterface> interfaces) {
+		if (!(address instanceof Inet6Address))
+			return null;
+
+		InetAddress current = null;
+
+		// scope matching
+		final int scope = ((Inet6Address) address).getScopeId();
+		for (NetworkInterface nif : interfaces) {
+			if (nif.getIndex() != scope)
+				continue;
+
+			for (Enumeration<InetAddress> e = nif.getInetAddresses(); e.hasMoreElements();) {
+				current = e.nextElement();
+				if (current instanceof Inet6Address && current.isLinkLocalAddress())
+					return current;
+			}
+		}
+
+		// fallback
+		current = null;
+		try {
+			current = InetAddress.getByAddress(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x01 });
 		} catch (Exception e) {}
 		doLog("XX Fallback to " + current.getHostAddress().toString());
 		return current;
@@ -117,6 +147,7 @@ public class Searcher extends Thread {
 		bufferTX[2] = (byte) 18;	// static
 		bufferTX[3] = (byte) 1;		// static
 		bufferTX[4] = (byte) 2;		// answer (1: search)
+		InetAddress addressLOC = null;
 
 		Map<String, Long> lastRemotes = new HashMap<>();
 		String remote = null;
@@ -173,6 +204,9 @@ public class Searcher extends Thread {
 				if (new String(bufferRX, 0, packetRX.getLength()).equals("AVMfritz")) {
 					doLog("XX Detected Slint recovery");
 
+					// answering
+					addressLOC = getEndpoint(packetRX.getAddress(), interfaces);
+
 					bufferTX[11] = (byte) 0;
 					bufferTX[10] = (byte) 0;
 					bufferTX[9] = (byte) 0;
@@ -184,7 +218,7 @@ public class Searcher extends Thread {
 					doLog("XX Requested ip " + addressREQ.getHostAddress());
 
 					// answering
-					final InetAddress addressLOC = getEndpoint(remote, addresses);
+					addressLOC = getEndpoint(remote, addresses);
 
 					byte[] barrayLOC = addressLOC.getAddress();
 					bufferTX[11] = (byte) barrayLOC[0];
@@ -192,9 +226,10 @@ public class Searcher extends Thread {
 					bufferTX[9] = (byte) barrayLOC[2];
 					bufferTX[8] = (byte) barrayLOC[3];
 
-					doLog(">> Replying with IP " + addressLOC.getHostAddress().toString());
 				}
 
+				if (addressLOC!=null)
+					doLog(">> Replying with IP " + addressLOC.getHostAddress().toString());
 				DatagramPacket sendPacket = new DatagramPacket(bufferTX, bufferTX.length, packetRX.getAddress(), broadcastPort);
 				socketRX.send(sendPacket);
 			} catch (Exception e) {
