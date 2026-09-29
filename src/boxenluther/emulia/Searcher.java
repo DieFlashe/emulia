@@ -142,11 +142,7 @@ public class Searcher extends Thread {
 		MulticastSocket socketRX = null;
 		DatagramPacket packetRX = null;
 		byte[] bufferRX = new byte[16];
-		byte[] bufferTX = new byte[16];
-		Arrays.fill(bufferTX, (byte) 0);
-		bufferTX[2] = (byte) 18;	// static
-		bufferTX[3] = (byte) 1;		// static
-		bufferTX[4] = (byte) 2;		// answer (1: search)
+		byte[] bufferTX = null;
 		InetAddress addressLOC = null;
 
 		Map<String, Long> lastRemotes = new HashMap<>();
@@ -201,33 +197,65 @@ public class Searcher extends Thread {
 				lastRemotes.put(remote, now);
 
 				// requestion
-				if (new String(bufferRX, 0, packetRX.getLength()).equals("AVMfritz")) {
-					doLog("XX Detected Slint recovery");
+				switch (packetRX.getLength()) {
+					case 8: // Slint
+						if (!new String(bufferRX, 0, 8).equals("AVMfritz")) {
+							doLog("XX Invalid Slint packet received");
+							continue;
+						}
+						if (packetRX.getPort() != 5035) {
+							doLog("XX Invalid Slint source port.");
+							continue;
+						}
+						doLog("XX Detected Slint recovery");
 
-					// answering
-					addressLOC = getEndpoint(packetRX.getAddress(), interfaces);
+						// answering
+						addressLOC = getEndpoint(packetRX.getAddress(), interfaces);
 
-					bufferTX[11] = (byte) 0;
-					bufferTX[10] = (byte) 0;
-					bufferTX[9] = (byte) 0;
-					bufferTX[8] = (byte) 0;
+						bufferTX = new byte[]{'A','V','M','f','r','i','t','z'};
 
-				} else {
-					doLog("XX Detected Adam2 recovery");
+						break;
+					case 16: // Adam2
+						if (	bufferRX[0] != 00 ||
+								bufferRX[1] != 00 ||
+								bufferRX[2] != 18 || // static
+								bufferRX[3] != 01 || // static
+								bufferRX[4] != 01 || // search
+								bufferRX[5] != 00 ||
+								bufferRX[6] != 00 ||
+								bufferRX[7] != 00 ||
+								bufferRX[12] != 0 ||
+								bufferRX[13] != 0 ||
+								bufferRX[14] != 0 ||
+								bufferRX[15] != 0) {
+							doLog("XX Invalid Adam2 packet received");
+							continue;
+						}
+						doLog("XX Detected Adam2 recovery");
 
-					final byte[] addressBYT = new byte[] { bufferRX[8], bufferRX[9], bufferRX[10], bufferRX[11] };
-					final InetAddress addressREQ = InetAddress.getByAddress(addressBYT);
-					doLog("XX Requested ip " + Helper.beautifyIP(addressREQ.getHostAddress()));
+						// desired
+						final byte[] addressBYT = new byte[] { bufferRX[8], bufferRX[9], bufferRX[10], bufferRX[11] };
+						final InetAddress addressREQ = InetAddress.getByAddress(addressBYT);
+						doLog("XX Requested ip " + Helper.beautifyIP(addressREQ.getHostAddress()));
 
-					// answering
-					addressLOC = getEndpoint(remote, addresses);
+						// answering
+						addressLOC = getEndpoint(remote, addresses);
 
-					byte[] barrayLOC = addressLOC.getAddress();
-					bufferTX[11] = (byte) barrayLOC[0];
-					bufferTX[10] = (byte) barrayLOC[1];
-					bufferTX[9] = (byte) barrayLOC[2];
-					bufferTX[8] = (byte) barrayLOC[3];
+						bufferTX = new byte[16];
+						Arrays.fill(bufferTX, (byte) 0);
+						bufferTX[2] = (byte) 18; // static
+						bufferTX[3] = (byte) 01; // static
+						bufferTX[4] = (byte) 02; // answer
+						byte[] barrayLOC = addressLOC.getAddress();
+						bufferTX[11] = (byte) barrayLOC[0];
+						bufferTX[10] = (byte) barrayLOC[1];
+						bufferTX[9] = (byte) barrayLOC[2];
+						bufferTX[8] = (byte) barrayLOC[3];
 
+						break;
+					default:
+						doLog("XX Unknown packet length received");
+						continue; 
 				}
 
 				if (addressLOC!=null)
