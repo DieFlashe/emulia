@@ -1,6 +1,7 @@
 package boxenluther.emulia;
 
 import java.net.DatagramPacket;
+import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
@@ -206,6 +207,10 @@ public class Searcher extends Thread {
 							doLog("XX Invalid Slint source port.");
 							continue;
 						}
+						if (!(packetRX.getAddress() instanceof Inet6Address)) {
+							doLog("XX Invalid Slint ip protocoll.");
+							continue;
+						}
 						doLog("XX Detected Slint recovery");
 
 						// answering
@@ -229,6 +234,10 @@ public class Searcher extends Thread {
 								bufferRX[14] != 0 ||
 								bufferRX[15] != 0) {
 							doLog("XX Invalid Adam2 packet received");
+							continue;
+						}
+						if (!(packetRX.getAddress() instanceof Inet4Address)) {
+							doLog("XX Invalid Adam2 ip protocol.");
 							continue;
 						}
 						doLog("XX Detected Adam2 recovery");
