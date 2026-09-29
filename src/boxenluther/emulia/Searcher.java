@@ -59,7 +59,7 @@ public class Searcher extends Thread {
 		doLog("XX Fallback to " + current.getHostAddress().toString());
 		return current;
 	}
-	private InetAddress getEndpoint(final InetAddress address, final List<NetworkInterface> interfaces) {
+	private Inet6Address getEndpoint(final InetAddress address, final List<NetworkInterface> interfaces) {
 		if (!(address instanceof Inet6Address))
 			return null;
 
@@ -74,7 +74,7 @@ public class Searcher extends Thread {
 			for (Enumeration<InetAddress> e = nif.getInetAddresses(); e.hasMoreElements();) {
 				current = e.nextElement();
 				if (current instanceof Inet6Address && current.isLinkLocalAddress())
-					return current;
+					return (Inet6Address) current;
 			}
 		}
 
@@ -84,7 +84,7 @@ public class Searcher extends Thread {
 			current = InetAddress.getByAddress(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x01 });
 		} catch (Exception e) {}
 		doLog("XX Fallback to " + current.getHostAddress().toString());
-		return current;
+		return (Inet6Address) current;
 	}
 
 	private List<InetAddress> allEndpoints() {
@@ -143,7 +143,6 @@ public class Searcher extends Thread {
 		DatagramPacket packetRX = null;
 		byte[] bufferRX = new byte[16];
 		byte[] bufferTX = null;
-		InetAddress addressLOC = null;
 
 		Map<String, Long> lastRemotes = new HashMap<>();
 		String remote = null;
@@ -198,7 +197,7 @@ public class Searcher extends Thread {
 
 				// requestion
 				switch (packetRX.getLength()) {
-					case 8: // Slint
+					case 8: // Slint IPv6
 						if (!new String(bufferRX, 0, 8).equals("AVMfritz")) {
 							doLog("XX Invalid Slint packet received");
 							continue;
@@ -210,12 +209,13 @@ public class Searcher extends Thread {
 						doLog("XX Detected Slint recovery");
 
 						// answering
-						addressLOC = getEndpoint(packetRX.getAddress(), interfaces);
+						Inet6Address addressLOC6 = getEndpoint(packetRX.getAddress(), interfaces);
 
 						bufferTX = new byte[]{'A','V','M','f','r','i','t','z'};
 
+						doLog(">> Replying with IP " + addressLOC6.getHostAddress().split("%")[0] + "%" + addressLOC6.getScopeId());
 						break;
-					case 16: // Adam2
+					case 16: // Adam2 IPv4
 						if (	bufferRX[0] != 00 ||
 								bufferRX[1] != 00 ||
 								bufferRX[2] != 18 || // static
@@ -239,27 +239,26 @@ public class Searcher extends Thread {
 						doLog("XX Requested ip " + Helper.beautifyIP(addressREQ.getHostAddress()));
 
 						// answering
-						addressLOC = getEndpoint(remote, addresses);
+						InetAddress addressLOC4 = getEndpoint(remote, addresses);
 
 						bufferTX = new byte[16];
 						Arrays.fill(bufferTX, (byte) 0);
 						bufferTX[2] = (byte) 18; // static
 						bufferTX[3] = (byte) 01; // static
 						bufferTX[4] = (byte) 02; // answer
-						byte[] barrayLOC = addressLOC.getAddress();
+						byte[] barrayLOC = addressLOC4.getAddress();
 						bufferTX[11] = (byte) barrayLOC[0];
 						bufferTX[10] = (byte) barrayLOC[1];
 						bufferTX[9] = (byte) barrayLOC[2];
 						bufferTX[8] = (byte) barrayLOC[3];
 
+						doLog(">> Replying with IP " + addressLOC4.getHostAddress().toString());
 						break;
 					default:
 						doLog("XX Unknown packet length received");
 						continue; 
 				}
 
-				if (addressLOC!=null)
-					doLog(">> Replying with IP " + addressLOC.getHostAddress().toString());
 				DatagramPacket sendPacket = new DatagramPacket(bufferTX, bufferTX.length, packetRX.getAddress(), broadcastPort);
 				socketRX.send(sendPacket);
 			} catch (Exception e) {
