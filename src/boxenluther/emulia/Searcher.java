@@ -25,7 +25,7 @@ public class Searcher extends Thread {
 		Helper.doLog(tag, txt);
 	}
 
-	private InetAddress getEndpoint(final String remote, final List<InetAddress> addresses) {
+	private Inet4Address getEndpoint(final String remote, final List<InetAddress> addresses) {
 		if (!remote.contains("."))
 			return null;
 
@@ -35,22 +35,22 @@ public class Searcher extends Thread {
 		subnet = subnet.substring(0, subnet.lastIndexOf('.') + 1);
 		for (Iterator<InetAddress> i = addresses.iterator(); i.hasNext();) {
 			current = i.next();
-			if (current.getHostAddress().startsWith(subnet))
-				return (current);
+			if (current instanceof Inet4Address && current.getHostAddress().startsWith(subnet))
+				return (Inet4Address) current;
 		}
 		// /16
 		subnet = subnet.substring(0, subnet.lastIndexOf('.') + 1);
 		for (Iterator<InetAddress> i = addresses.iterator(); i.hasNext();) {
 			current = i.next();
-			if (current.getHostAddress().startsWith(subnet))
-				return (current);
+			if (current instanceof Inet4Address && current.getHostAddress().startsWith(subnet))
+				return (Inet4Address) current;
 		}
 		// /8
 		subnet = subnet.substring(0, subnet.lastIndexOf('.') + 1);
 		for (Iterator<InetAddress> i = addresses.iterator(); i.hasNext();) {
 			current = i.next();
-			if (current.getHostAddress().startsWith(subnet))
-				return (current);
+			if (current instanceof Inet4Address && current.getHostAddress().startsWith(subnet))
+				return (Inet4Address) current;
 		}
 		// fallback
 		current = null;
@@ -58,7 +58,7 @@ public class Searcher extends Thread {
 			current = InetAddress.getByAddress(new byte[] { (byte) 192, (byte) 168, (byte) 178, (byte) 1 });
 		} catch (Exception e) {}
 		doLog("XX Fallback to " + current.getHostAddress().toString());
-		return current;
+		return (Inet4Address) current;
 	}
 	private Inet6Address getEndpoint(final InetAddress address, final List<NetworkInterface> interfaces) {
 		if (!(address instanceof Inet6Address))
@@ -248,7 +248,7 @@ public class Searcher extends Thread {
 						doLog("XX Requested ip " + Helper.beautifyIP(addressREQ.getHostAddress()));
 
 						// answering
-						InetAddress addressLOC4 = getEndpoint(remote, addresses);
+						Inet4Address addressLOC4 = getEndpoint(remote, addresses);
 
 						bufferTX = new byte[16];
 						Arrays.fill(bufferTX, (byte) 0);
