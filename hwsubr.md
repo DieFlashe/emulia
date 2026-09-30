@@ -186,6 +186,7 @@ Known `HWSubRevision` from collected environments
  - FRITZ!Box 7510<br>
    ProductID `Fritz_Box_HW271`
     * HWSubRevision `2`
+    * HWSubRevision `3`
 
  - FRITZ!Box 5590 Fiber<br>
    ProductID `Fritz_Box_HW272`
@@ -216,5 +217,6 @@ Known `HWSubRevision` from collected environments
 
  - FRITZ!Box 6360 Cable<br>
    ProductID `Fritz_Box_Puma`
+    * HWSubRevision `1`
     * HWSubRevision `2`
 
