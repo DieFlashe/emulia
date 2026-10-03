@@ -1,18 +1,9 @@
 package boxenluther.emulia;
 
-import java.net.ServerSocket;
-import java.net.Socket;
-
 public class Main {
-	static public boolean running = true;
-
-	static final private String tag = "SRV";
-	static private void doLog(String txt) {
-		Helper.doLog();
-		Helper.doLog(tag, txt);
-	}
 
 	public static void main(String[] args) {
+
 		String confFile = "_Generic";
 		if (args != null && args.length > 0)
 			confFile = args[0];
@@ -38,37 +29,8 @@ public class Main {
 
 		new Searcher().start();
 
-		ServerSocket listener = null;
-
-		try {
-			final int ftpcontrolPort = 21;
-			doLog("-- FTP-Server starting on " + ftpcontrolPort + "/tcp");
-			listener = new ServerSocket(ftpcontrolPort);
-		} catch (Exception e) {
-			doLog("XX Error creating listener: " + e.toString());
-			e.printStackTrace();
-			System.exit(1);
-			return;
-		}
-
-		while (running) {
-			try {
-				Socket socket = listener.accept();
-				doLog("<< Client connected from " + socket.getInetAddress().getHostAddress() + ":" + socket.getPort());
-				new Worker(device, socket).start();
-			} catch (Exception e) {
-				doLog("XX Error creating worker: " + e.toString());
-				e.printStackTrace();
-				running = false;
-			}
-		}
-
-		try {
-			doLog("-- FTP-Server stopping");
-			listener.close();
-		} catch (Exception e) {}
+		new WorkerDispatcher(device).start();
 
 	}
-
 
 }
