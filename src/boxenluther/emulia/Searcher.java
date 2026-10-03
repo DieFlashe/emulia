@@ -114,7 +114,7 @@ public class Searcher extends Thread {
 		}
 
 		for (Iterator<InetAddress> i = addresses.iterator(); i.hasNext();)
-			doLog("-- Using IP: " + Helper.beautifyIP(i.next().getHostAddress().toString()));
+			doLog("-- Outbound IP: " + Helper.beautifyIP(i.next().getHostAddress().toString()));
 		return addresses;
 	}
 
@@ -159,11 +159,11 @@ public class Searcher extends Thread {
 			mcgroup = InetAddress.getByAddress(new byte[] { (byte) 0xff, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 });
 		} catch (Exception e) {}
 
-		doLog("-- Waiting for broadcasts on " + broadcastPort + "/udp");
-		String nifs = "";
+		doLog("-- Listening IP: 0.0.0.0");
 		for (NetworkInterface nif : interfaces)
-			nifs += " " + "{" + nif.getName() + "}";
-		doLog("-- Using ifs: (0.0.0.0)" + nifs);
+			doLog("-- Listening IF: " + nif.getName());
+
+		doLog("-- Waiting for broadcasts on " + broadcastPort + "/udp");
 
 		// looping
 		while (running) {
