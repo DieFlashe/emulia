@@ -27,6 +27,14 @@ public class Main {
 		final Device device = new Device(true);		// reload env on program start
 //		final Device device = null;					// reload env on every connect
 
+		final Fastboot fastboot = new Fastboot(device);
+		fastboot.start();
+		while (!fastboot.ready) {
+			try {
+				Thread.sleep(9);
+			} catch (Exception e) {}
+		}
+
 		final Dispatcher dispatcher = new Dispatcher(device);
 		dispatcher.start();
 		while (!dispatcher.ready) {
