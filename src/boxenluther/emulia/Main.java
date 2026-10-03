@@ -26,6 +26,7 @@ public class Main {
 
 		final Device device = new Device(true);		// reload env on program start
 //		final Device device = null;					// reload env on every connect
+		Helper.doLog();
 
 		final Fastboot fastboot = new Fastboot(device);
 		fastboot.start();

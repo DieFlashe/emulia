@@ -14,9 +14,13 @@ public class Dispatcher extends Thread {
 	}
 
 	static final private String tag = "SRV";
-	static private void doLog(String txt) {
-		Helper.doLog();
+	static private void doLog(String txt, boolean init) {
+		if (!init)
+			Helper.doLog();
 		Helper.doLog(tag, txt);
+	}
+	static private void doLog(String txt) {
+		doLog(txt, false);
 	}
 
 	@Override public void run() {
