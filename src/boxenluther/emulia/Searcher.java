@@ -32,21 +32,21 @@ public class Searcher extends Thread {
 		String subnet = remote;
 		InetAddress current = null;
 		// /24
-		subnet = subnet.substring(0, subnet.lastIndexOf('.') + 1);
+		subnet = subnet.substring(0, subnet.lastIndexOf('.', subnet.length() - 2) + 1);
 		for (Iterator<InetAddress> i = addresses.iterator(); i.hasNext();) {
 			current = i.next();
 			if (current instanceof Inet4Address && current.getHostAddress().startsWith(subnet))
 				return (Inet4Address) current;
 		}
 		// /16
-		subnet = subnet.substring(0, subnet.lastIndexOf('.') + 1);
+		subnet = subnet.substring(0, subnet.lastIndexOf('.', subnet.length() - 2) + 1);
 		for (Iterator<InetAddress> i = addresses.iterator(); i.hasNext();) {
 			current = i.next();
 			if (current instanceof Inet4Address && current.getHostAddress().startsWith(subnet))
 				return (Inet4Address) current;
 		}
 		// /8
-		subnet = subnet.substring(0, subnet.lastIndexOf('.') + 1);
+		subnet = subnet.substring(0, subnet.lastIndexOf('.', subnet.length() - 2) + 1);
 		for (Iterator<InetAddress> i = addresses.iterator(); i.hasNext();) {
 			current = i.next();
 			if (current instanceof Inet4Address && current.getHostAddress().startsWith(subnet))
