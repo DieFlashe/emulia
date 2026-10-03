@@ -25,7 +25,7 @@ public class Dispatcher extends Thread {
 
 	@Override public void run() {
 		final int ftpcontrolPort = 21;
-		doLog("-- FTP-Server starting on " + ftpcontrolPort + "/tcp");
+		doLog("-- FTP-Server starting on " + ftpcontrolPort + "/tcp", true);
 		try (ServerSocket listener = new ServerSocket(ftpcontrolPort)) {
 			ready = true;
 			while (true) {
