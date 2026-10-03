@@ -3,12 +3,12 @@ package boxenluther.emulia;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class WorkerDispatcher extends Thread {
+public class Dispatcher extends Thread {
 
 	public volatile boolean ready = false;
 
 	private final Device device;
-	public WorkerDispatcher(Device device) {
+	public Dispatcher(Device device) {
 		super();
 		this.device = device;
 	}
