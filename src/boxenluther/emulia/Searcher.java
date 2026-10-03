@@ -216,7 +216,7 @@ public class Searcher extends Thread {
 						// answering
 						Inet6Address addressLOC6 = getEndpoint(packetRX.getAddress(), interfaces);
 
-						bufferTX = new byte[]{'A','V','M','f','r','i','t','z'};
+						bufferTX = new byte[]{'f','r','i','t','z','A','V','M'};
 
 						doLog(">> Replying with IP " + addressLOC6.getHostAddress().split("%")[0] + "%" + addressLOC6.getScopeId());
 						break;
