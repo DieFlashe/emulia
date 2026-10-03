@@ -27,9 +27,15 @@ public class Main {
 		final Device device = new Device(true);		// reload env on program start
 //		final Device device = null;					// reload env on every connect
 
-		new Searcher().start();
+		final WorkerDispatcher worker = new WorkerDispatcher(device);
+		worker.start();
+		while (!worker.ready) {
+			try {
+				Thread.sleep(9);
+			} catch (Exception e) {}
+		}
 
-		new WorkerDispatcher(device).start();
+		new Searcher().start();
 
 	}
 

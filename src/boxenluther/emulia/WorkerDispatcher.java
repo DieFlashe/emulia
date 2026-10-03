@@ -5,13 +5,15 @@ import java.net.Socket;
 
 public class WorkerDispatcher extends Thread {
 
+	public volatile boolean ready = false;
+
 	private final Device device;
 	public WorkerDispatcher(Device device) {
 		super();
 		this.device = device;
 	}
 
-	static final private String tag = "FTP";
+	static final private String tag = "Rv1";
 	static private void doLog(String txt) {
 		Helper.doLog();
 		Helper.doLog(tag, txt);
@@ -21,6 +23,7 @@ public class WorkerDispatcher extends Thread {
 		final int ftpcontrolPort = 21;
 		doLog("-- FTP-Server starting on " + ftpcontrolPort + "/tcp");
 		try (ServerSocket listener = new ServerSocket(ftpcontrolPort)) {
+			ready = true;
 			while (true) {
 				Socket socket = null;
 				// accept
