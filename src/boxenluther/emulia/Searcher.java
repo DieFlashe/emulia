@@ -218,7 +218,7 @@ public class Searcher extends Thread {
 
 						bufferTX = new byte[]{'f','r','i','t','z','A','V','M'};
 
-						doLog(">> Replying with IP " + addressLOC6.getHostAddress().split("%")[0] + "%" + addressLOC6.getScopeId());
+						doLog(">> Replying with IP " + Helper.beautifyIP(addressLOC6.getHostAddress().split("%")[0] + "%" + addressLOC6.getScopeId()));
 						break;
 					case 16: // Adam2 IPv4
 						if (	bufferRX[0] != 00 ||
