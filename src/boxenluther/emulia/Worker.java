@@ -118,7 +118,7 @@ public class Worker extends Thread {
 				sendLine(425, "Use PORT or PASV first.");
 				return;
 		}
-		doLog("OO Sending: " + fileName);
+		doLog("OO Sending: " + new File(fileName).getName());
 
 		List<String> content = null;
 		switch (fileName) {
@@ -218,7 +218,7 @@ public class Worker extends Thread {
 				sendLine(501, "Error, invalid transfer mode");
 				return;
 		}
-		doLog("OO Receiving: " + fileName);
+		doLog("OO Receiving: " + new File(fileName).getName());
 
 		File file = new File(fileName);
 		if (file.exists()) {
