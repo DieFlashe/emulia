@@ -40,7 +40,7 @@ public class Dispatcher extends Thread {
 				}
 				// worker
 				try {
-					doLog("<< Client connected from " + socket.getInetAddress().getHostAddress() + ":"+ socket.getPort());
+					doLog("== Client connected from " + socket.getInetAddress().getHostAddress() + ":"+ socket.getPort());
 					new Worker(device, socket).start();
 				} catch (Exception e) {
 					doLog("XX Error creating worker: " + e.toString());

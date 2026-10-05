@@ -454,7 +454,7 @@ public class Worker extends Thread {
 							sendLine(227, "Entering Passive Mode (" + host + "," + port + ")");
 							dataSocket = datServer.accept();
 							datWriter = new PrintWriter(dataSocket.getOutputStream(), true);
-							doLog("-- PAS opened");
+							doLog("== PAS opened");
 						} catch (Exception e) {
 							doLog("XX PAS opening failed: " + e.getMessage());
 							e.printStackTrace();
@@ -468,7 +468,7 @@ public class Worker extends Thread {
 						try {
 							dataSocket = new Socket(host, port);
 							datWriter = new PrintWriter(dataSocket.getOutputStream(), true);
-							doLog("-- ACT opened");
+							doLog("== ACT opened");
 							sendLine(200, "Command OK");
 						} catch (Exception e) {
 							doLog("XX ACT opening failed: " + e.getMessage());
