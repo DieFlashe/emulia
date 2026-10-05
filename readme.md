@@ -12,6 +12,7 @@ If you like the program, I would be happy to receive a donation.
 
 ### Firewall
  - 5035 udp - broadcast receiver
+ - 5554 udp - fastboot server
  - 21 tcp - ftp control channel
  - 30000-49999 tcp - ftp data channels
 
