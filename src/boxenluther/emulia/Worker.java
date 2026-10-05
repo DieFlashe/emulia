@@ -357,18 +357,20 @@ public class Worker extends Thread {
 			sendLine(220, device.dAdam());
 
 			while (running) {
-				String line = ctlInReader.readLine();
 				String cmd = "";
 				String arg = "";
 				int sepidx = -1;
-				if (line != null) {
-					doLog("<< " + line);
-					if (line.toUpperCase().startsWith("QUOTE "))
-						line = line.substring(6);
-					sepidx = line.indexOf(' ');
-					cmd = (((sepidx == -1) ? line : (line.substring(0, sepidx)))).toUpperCase();
-					arg = ((sepidx == -1) ? "" : line.substring(sepidx + 1));
-				}
+				String line = ctlInReader.readLine();
+
+				if (line == null)
+					break;
+
+				doLog("<< " + line);
+				if (line.toUpperCase().startsWith("QUOTE "))
+					line = line.substring(6);
+				sepidx = line.indexOf(' ');
+				cmd = (((sepidx == -1) ? line : (line.substring(0, sepidx)))).toUpperCase();
+				arg = ((sepidx == -1) ? "" : line.substring(sepidx + 1));
 
 				switch (cmd) {
 					case "USER":
