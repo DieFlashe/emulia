@@ -138,7 +138,10 @@ public class Device {
 
 			// output
 //			doLog("-- Loaded " + mapEnv.size() + " environement items");
-			doLog("## " + minLen22("FTP-Identification") + dEva());
+			if (isUboot())
+				doLog("## " + minLen22("Uboot-Version") + dUboot());
+			else
+				doLog("## " + minLen22("FTP-Identification") + dEva());
 			for (String k : getEnv()) {
 				if (k.startsWith("debagger__user "))
 					continue;
@@ -272,6 +275,16 @@ public class Device {
 		content.add(minLen22("run_mounths") + run_mounths);
 		content.add(minLen22("run_years") + run_years);
 		return content;
+	}
+	private boolean isUboot() {
+		return mapEnv.containsKey("oem__version-bootloader");
+	}
+	public String dUboot() {
+		// from DieFlashe
+		if (mapEnv.containsKey("oem__version-bootloader"))
+			return mapEnv.get("oem__version-bootloader");
+
+		return "U-Boot 2000.00-EMU-1.00";
 	}
 	public String dAdam() {
 
