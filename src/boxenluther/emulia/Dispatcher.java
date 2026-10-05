@@ -55,7 +55,6 @@ public class Dispatcher extends Thread {
 			e.printStackTrace();
 			System.exit(1);
 		}
-
 	}
 
 }
