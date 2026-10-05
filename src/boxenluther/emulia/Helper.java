@@ -154,6 +154,10 @@ public final class Helper {
 		if (ip.indexOf('.') >= 0)
 			return ip;
 
+		// already compressed
+		if (ip.contains("::"))
+			return ip;
+
 		// interface scope
 		String scope = "";
 		int p = ip.indexOf('%');
