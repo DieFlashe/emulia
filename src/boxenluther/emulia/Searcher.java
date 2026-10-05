@@ -84,7 +84,7 @@ public class Searcher extends Thread {
 		try {
 			current = InetAddress.getByAddress(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x01 });
 		} catch (Exception e) {}
-		doLog("XX Fallback to " + current.getHostAddress().toString());
+		doLog("XX Fallback to " + Helper.beautifyIP(current.getHostAddress().toString()));
 		return (Inet6Address) current;
 	}
 
