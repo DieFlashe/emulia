@@ -232,6 +232,8 @@ public class Device {
 
 		// body
 		for (String key : sortedEnv) {
+			if (key.startsWith("oem__"))
+				continue;
 			if (key.startsWith("ftp__"))
 				continue;
 			if (key.startsWith("counter__"))
