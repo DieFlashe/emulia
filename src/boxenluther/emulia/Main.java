@@ -28,23 +28,26 @@ public class Main {
 //		final Device device = null;					// reload env on every connect
 		Helper.doLog();
 
+
+		final Searcher searcher = new Searcher();
+		searcher.start();
+		while (!searcher.ready) {
+			try { Thread.sleep(9); }
+			catch (Exception e) {}
+		}
+
 		final Fastboot fastboot = new Fastboot(device);
 		fastboot.start();
-		while (!fastboot.ready) {
-			try {
-				Thread.sleep(9);
-			} catch (Exception e) {}
-		}
 
 		final Dispatcher dispatcher = new Dispatcher(device);
 		dispatcher.start();
-		while (!dispatcher.ready) {
-			try {
-				Thread.sleep(9);
-			} catch (Exception e) {}
-		}
 
-		new Searcher().start();
+		while (!fastboot.ready && !dispatcher.ready) {
+			try { Thread.sleep(9); }
+			catch (Exception e) {}
+		}
+		searcher.running = true;
+
 
 	}
 

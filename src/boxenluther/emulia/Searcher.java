@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Searcher extends Thread {
-	public boolean running = true;
+	public volatile boolean ready = false;
+	public boolean running = false;
 
 	final private String tag = "BCT";
 	private void doLog(String txt) {
@@ -162,6 +163,12 @@ public class Searcher extends Thread {
 		doLog("-- Listening IP: 0.0.0.0");
 		for (NetworkInterface nif : interfaces)
 			doLog("-- Listening IF: " + nif.getName());
+
+		ready = true;
+		while (!running) {
+			try { Thread.sleep(9); }
+			catch (Exception e) {}
+		}
 
 		doLog("-- Waiting for broadcasts on " + broadcastPort + "/udp");
 
