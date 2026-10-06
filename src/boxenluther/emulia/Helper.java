@@ -210,15 +210,15 @@ public final class Helper {
 		if (bestLen < 2)
 			bestStart = -1;
 
-		StringBuilder result = new StringBuilder();
+		String result = "";
 		for (int i = 0; i < groups.length; i++) {
 			if (i == bestStart) {
-				result.append("::");
+				result += "::";
 				i += bestLen - 1;
 			} else {
 				if (result.length() > 0 && result.charAt(result.length() - 1) != ':')
-					result.append(':');
-				result.append(groups[i]);
+					result += ':';
+				result += groups[i];
 			}
 		}
 
