@@ -7,6 +7,10 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -142,6 +146,15 @@ public final class Helper {
 	}
 
 
+	static public byte[] string2bytes(String txt) {
+		return txt.getBytes(StandardCharsets.UTF_8);
+	}
+	static public String bytes2string(byte[] data) throws CharacterCodingException {
+		return StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
+				.onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(data)).toString();
+	}
+
+	
 	static public String beautifyIP(String ip, Integer port) {
 		if (ip.indexOf('.') >= 0)
 			return ip + ":" + port;
