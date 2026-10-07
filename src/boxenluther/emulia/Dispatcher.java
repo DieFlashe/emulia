@@ -13,13 +13,13 @@ public class Dispatcher extends Thread {
 		this.device = device;
 	}
 
-	static final private String tag = "SRV";
-	static private void doLog(String txt, boolean init) {
+	final private String tag = "SRV";
+	private void doLog(String txt, boolean init) {
 		if (!init)
 			Helper.doLog();
 		Helper.doLog(tag, txt);
 	}
-	static private void doLog(String txt) {
+	private void doLog(String txt) {
 		doLog(txt, false);
 	}
 

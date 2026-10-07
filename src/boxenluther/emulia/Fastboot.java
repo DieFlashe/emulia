@@ -32,12 +32,15 @@ public class Fastboot extends Thread {
 		this.device = device;
 	}
 
-	static final private String tag = "FST";
-	static private void doLog(String txt) {
-		Helper.doLog(tag, txt);
+	final private String tag = "FST";
+	private void doLog(String txt) {
+		doLog(tag, txt);
 	}
 	private void doLog(Session session, String txt) {
-		Helper.doLog("P" + session.remotePort, txt);
+		doLog("P" + session.remotePort, txt);
+	}
+	private void doLog(String tag, String txt) {
+		Helper.doLog(tag, txt);
 	}
 
 	private final Map<String, Session> sessions = new HashMap<>();
@@ -859,7 +862,7 @@ public class Fastboot extends Thread {
 					session = new Session(device, packet.getAddress().getHostAddress(), packet.getPort());
 					sessions.put(remote, session);
 
-					Helper.doLog();
+					doLog((String) null, ""); // empty line
 					doLog(session, "++ Client from " + Helper.beautifyIP(session.remoteIP, session.remotePort));
 				}
 				session.lastSeen = System.nanoTime();

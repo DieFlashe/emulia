@@ -190,7 +190,7 @@ public class Searcher extends Thread {
 				// receiving
 				packetRX = new DatagramPacket(bufferRX, bufferRX.length);
 				socketRX.receive(packetRX);
-				doLog(null, ""); // empty line
+				doLog((String) null, ""); // empty line
 				doLog("<< Request from " + Helper.beautifyIP(packetRX.getAddress().getHostAddress(), packetRX.getPort()));
 
 				// ratelimit
