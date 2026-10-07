@@ -9,6 +9,7 @@ public class Main {
 			confFile = args[0];
 
 //TODO  load custom device-config on start -> discarded -> use args + collected ^^
+		confFile = DEBUG.confFile(confFile);
 //		confFile = "DEVICE";	//DEVEL
 
 		int i = -1;
