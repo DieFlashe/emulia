@@ -22,10 +22,8 @@ import java.util.Queue;
 public class Fastboot extends Thread {
 
 	public volatile boolean ready = false;
-
 	final private int udpFastbootPacketMax = 1452; // MTU1500=1452 - MTU1280=1232 - AVM=1024
 	private final Map<String, Session> sessions = new HashMap<>();
-	private final Map<Integer, byte[]> tffs = new HashMap<>();
 
 	private final Device device;
 	public Fastboot(Device device) {
@@ -459,9 +457,7 @@ public class Fastboot extends Thread {
 					break;
 				}
 
-				byte[] data = tffs.get(rID);
-				if (data == null)
-					data = counterTffs(session, rID);
+				byte[] data = counterTffs(session, rID);
 				session.selectedData = data != null ? data.clone() : new byte[0];
 				if (data == null)
 					resultFAIL(session, "Reading TFFS entry failed");
@@ -478,7 +474,6 @@ public class Fastboot extends Thread {
 				}
 
 				downloadRename(session, "tffs-" + wID);
-				tffs.put(wID, downloadedMeta(session));
 				resultOKAY(session);
 				break;
 			case "factory_defaults":
