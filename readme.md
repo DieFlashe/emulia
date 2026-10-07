@@ -1,6 +1,6 @@
 # Emulia
 
-Emulator for Adam & Eva of FRITZ! aka AVM devices.
+Emulator for Adam & Eva and Fastboot of FRITZ! aka AVM devices.
 
 Emulia is not related to FRITZ! aka AVM.
 
