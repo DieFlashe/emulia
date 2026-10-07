@@ -21,7 +21,30 @@ public final class Helper {
 
 	private Helper() {}
 
-	
+
+	static private Object getDEBUG(String method) throws Exception {
+		return Class.forName(Helper.class.getPackage().getName() + ".DEBUG").getMethod(method).invoke(null);
+	}
+	static public String confFile(String confFile) {
+		try {
+			return (String) getDEBUG("confFile");
+		} catch (Exception e) {}
+		return confFile;
+	}
+	static public Boolean writeLogs() {
+		try {
+			return (Boolean) getDEBUG("writeLogs");
+		} catch (Exception e) {}
+		return true;
+	}
+	static public Boolean writeBins() {
+		try {
+			return (Boolean) getDEBUG("writeBins");
+		} catch (Exception e) {}
+		return true;
+	}
+
+
 	static private String workDir = null;
 	static public String getWorkDir() {
 		if (workDir == null)
