@@ -1,4 +1,5 @@
 /bin/
+DEBUG.java
 hs_err_pid*
 *.class
 *.ear
