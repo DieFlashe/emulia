@@ -25,7 +25,6 @@ public class Fastboot extends Thread {
 
 	final private int udpFastbootPacketMax = 1452; // MTU1500=1452 - MTU1280=1232 - AVM=1024
 	private final Map<String, Session> sessions = new HashMap<>();
-	private final Map<String, String> extraEnv = new LinkedHashMap<>();
 	private final Map<Integer, byte[]> tffs = new HashMap<>();
 
 	private final Device device;
@@ -131,8 +130,6 @@ public class Fastboot extends Thread {
 	}
 	private String envGet(Session session, String key) {
 		synchronized (session.device) {
-			if (extraEnv.containsKey(key))
-				return extraEnv.get(key);
 			return session.device.getEnvVal(key);
 		}
 	}
@@ -142,12 +139,10 @@ public class Fastboot extends Thread {
 				return;
 			if (val.isEmpty()) {
 				// delete
-				extraEnv.remove(key);
 				session.device.delEnvVar(key);
 			} else {
 				// write
 				session.device.setEnvVar(key, val);
-				extraEnv.put(key, val);
 			}
 		}
 	}
@@ -162,11 +157,6 @@ public class Fastboot extends Thread {
 				String key = line.substring(0, i);
 				if (envAllowed(key))
 					ret.put(key, session.device.getEnvVal(key));
-			}
-			for (Map.Entry<String, String> entry : extraEnv.entrySet()) {
-				String key = entry.getKey();
-				if (envAllowed(key))
-					ret.put(key, entry.getValue());
 			}
 		}
 		return ret;
