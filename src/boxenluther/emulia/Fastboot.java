@@ -281,7 +281,7 @@ public class Fastboot extends Thread {
 
 	private void downloadStart(Session session, String arg) throws IOException {
 		long size = Long.parseLong(arg, 16);
-		if (size <= 0) // max 4GB
+		if (size < 0) // max 4GB
 			throw new IOException("Invalid download size");
 		if (size > 384 *1024 *1024) // 384MB, max 4GB
 			throw new IOException("Download too large");
@@ -299,6 +299,7 @@ public class Fastboot extends Thread {
 		session.downloadReceived = 0;
 		session.mode = SessionMODE.DOWNLOAD;
 		resultDATA(session, size);
+		doLog(session, "OO Receiving " + size + " bytes");
 		if (size == 0)
 			downloadFinish(session);
 	}
@@ -308,7 +309,7 @@ public class Fastboot extends Thread {
 		session.downloadFile = session.downloadTarget;
 		session.downloadTarget = null;
 		session.mode = SessionMODE.COMMAND;
-		doLog(session, "OO Received: " + session.downloadFile.getName() + " (" + session.downloadReceived + " bytes)");
+		doLog(session, "OO Received: " + session.downloadFile.getName());
 		resultOKAY(session);
 	}
 	private void downloadRename(Session session, String content) {
