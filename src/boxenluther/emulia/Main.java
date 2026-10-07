@@ -9,7 +9,10 @@ public class Main {
 			confFile = args[0];
 
 //TODO  load custom device-config on start -> discarded -> use args + collected ^^
-		confFile = DEBUG.confFile(confFile);
+		try {
+			Class<?> debug = Class.forName(Main.class.getPackage().getName() + ".DEBUG");
+			confFile = (String) debug.getMethod("confFile", String.class).invoke(null, "");
+		} catch (Exception e) {}
 //		confFile = "DEVICE";	//DEVEL
 
 		int i = -1;
