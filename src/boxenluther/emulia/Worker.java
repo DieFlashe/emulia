@@ -432,7 +432,7 @@ public class Worker extends Thread {
 							key = arg.substring(0, i).trim();
 							val = arg.substring(i).trim();
 						}
-						if (device.hadEnvVar(key) || Helper.allEnvVars.contains(key)) {
+						if (device.hadEnvVar(key)) {
 							device.setEnvVar(key, val);
 							sendLine(200, "SETENV command successful");
 						} else

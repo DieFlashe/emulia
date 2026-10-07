@@ -154,7 +154,7 @@ public final class Helper {
 				.onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(data)).toString();
 	}
 
-	
+
 	static public String beautifyIP(String ip, Integer port) {
 		if (ip.indexOf('.') >= 0)
 			return ip + ":" + port;

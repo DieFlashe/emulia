@@ -137,7 +137,7 @@ public class Fastboot extends Thread {
 		synchronized (session.device) {
 			if (key.equals("debagger__user") || key.equals("emulia__emulator"))
 				return false;
-			if (!session.device.hadEnvVar(key) && !Helper.allEnvVars.contains(key))
+			if (!session.device.hadEnvVar(key))
 				return false;
 
 			if (val.isEmpty())
