@@ -205,21 +205,21 @@ public class Searcher extends Thread {
 
 				// requestion
 				switch (packetRX.getLength()) {
-					case 8: // Slint IPv6
+					case 8: // Fastboot IPv6
 						if (!new String(bufferRX, 0, 8).equals("AVMfritz")) {
-							doLog("XX Invalid Slint packet received");
+							doLog("XX Invalid Fastboot packet received");
 							continue;
 						}
 						if (packetRX.getPort() != 5035) {
-							doLog("XX Invalid Slint source port.");
+							doLog("XX Invalid Fastboot source port.");
 							continue;
 						}
 						// discovery is able IPv 4+6
 						if (!(packetRX.getAddress() instanceof Inet6Address)) {
-							doLog("XX Invalid Slint ip protocoll.");
+							doLog("XX Invalid Fastboot ip protocoll.");
 							continue;
 						}
-						doLog("XX Detected Slint recovery");
+						doLog("XX Detected Fastboot recovery");
 
 						// answering (ipv6 only)
 						Inet6Address addressLOC6 = getEndpoint(packetRX.getAddress(), interfaces);
