@@ -137,13 +137,10 @@ public class Fastboot extends Thread {
 		synchronized (session.device) {
 			if (key.equals("debagger__user") || key.equals("emulia__emulator"))
 				return;
-			if (val.isEmpty()) {
-				// delete
+			if (val.isEmpty())
 				session.device.delEnvVar(key);
-			} else {
-				// write
+			else
 				session.device.setEnvVar(key, val);
-			}
 		}
 	}
 	private LinkedHashMap<String, String> envAll(Session session) {
