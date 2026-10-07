@@ -214,14 +214,23 @@ public class Searcher extends Thread {
 							doLog("XX Invalid Slint source port.");
 							continue;
 						}
+						// discovery is able IPv 4+6
 						if (!(packetRX.getAddress() instanceof Inet6Address)) {
 							doLog("XX Invalid Slint ip protocoll.");
 							continue;
 						}
 						doLog("XX Detected Slint recovery");
 
-						// answering
+						// answering (ipv6 only)
 						Inet6Address addressLOC6 = getEndpoint(packetRX.getAddress(), interfaces);
+						/*
+						InetAddress addressLOC;
+						if (packetRX.getAddress() instanceof Inet6Address)
+							addressLOC = getEndpoint(packetRX.getAddress(), interfaces);
+						else
+							addressLOC = getEndpoint(remote, addresses);
+						doLog(">> Replying with IP " + Helper.beautifyIP(addressLOC.getHostAddress()));
+						*/
 
 						bufferTX = new byte[]{'f','r','i','t','z','A','V','M'};
 
@@ -243,6 +252,7 @@ public class Searcher extends Thread {
 							doLog("XX Invalid Adam2 packet received");
 							continue;
 						}
+						// discovery contains ipv4
 						if (!(packetRX.getAddress() instanceof Inet4Address)) {
 							doLog("XX Invalid Adam2 ip protocol.");
 							continue;
