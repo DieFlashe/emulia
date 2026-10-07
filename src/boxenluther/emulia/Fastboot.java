@@ -133,14 +133,18 @@ public class Fastboot extends Thread {
 			return session.device.getEnvVal(key);
 		}
 	}
-	private void envSet(Session session, String key, String val) {
+	private boolean envSet(Session session, String key, String val) {
 		synchronized (session.device) {
 			if (key.equals("debagger__user") || key.equals("emulia__emulator"))
-				return;
+				return false;
+			if (!session.device.hadEnvVar(key) && !Helper.allEnvVars.contains(key))
+				return false;
+
 			if (val.isEmpty())
 				session.device.delEnvVar(key);
 			else
 				session.device.setEnvVar(key, val);
+			return true;
 		}
 	}
 	private LinkedHashMap<String, String> envAll(Session session) {
@@ -416,8 +420,10 @@ public class Fastboot extends Thread {
 			case "set_env":
 				int i = val.indexOf(':');
 				if (i > 0) {
-					envSet(session, val.substring(0, i), val.substring(i + 1));
-					resultOKAY(session);
+					if (envSet(session, val.substring(0, i), val.substring(i + 1)))
+						resultOKAY(session);
+					else
+						resultFAIL(session, "Invalid environment variable");
 				} else {
 					resultFAIL(session, "Invalid set_env arguments");
 				}
@@ -431,10 +437,15 @@ public class Fastboot extends Thread {
 					envSet(session, key, "");
 
 				// set new variables
+				String badName = "";
 				for (Map.Entry<String, String> entry : env.entrySet())
-					envSet(session, entry.getKey(), entry.getValue());
+					if (!envSet(session, entry.getKey(), entry.getValue()))
+						badName += " " + entry.getKey();
 
-				resultOKAY(session);
+				if (badName.isEmpty())
+					resultOKAY(session);
+				else
+					resultFAIL(session, "Invalid environment variable(s):" + badName);
 				break;
 			case "tffs_read":
 				session.selectedData = new byte[0];
