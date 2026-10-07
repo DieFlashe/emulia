@@ -308,7 +308,7 @@ public class Fastboot extends Thread {
 		session.downloadFile = session.downloadTarget;
 		session.downloadTarget = null;
 		session.mode = SessionMODE.COMMAND;
-		doLog(session, "OO Received: " + session.downloadFile.getName() + " (" + session.downloadReceived + " B)");
+		doLog(session, "OO Received: " + session.downloadFile.getName() + " (" + session.downloadReceived + " bytes)");
 		resultOKAY(session);
 	}
 	private void downloadRename(Session session, String content) {
@@ -601,7 +601,7 @@ public class Fastboot extends Thread {
 			case "upload":
 				session.uploadData = session.selectedData;
 				session.uploadOffset = 0;
-				doLog(session, "OO Sending: " + session.selectedName + " (" + session.uploadData.length + " B)");
+				doLog(session, "OO Sending: " + session.selectedName + " (" + session.uploadData.length + " bytes)");
 				resultDATA(session, session.uploadData.length);
 				if (session.uploadData.length == 0)
 					resultOKAY(session);
@@ -766,6 +766,10 @@ public class Fastboot extends Thread {
 					session.packetSize = Math.min(udpFastbootPacketMax, max);
 					session.initialized = true;
 
+					// show size + min-mtu
+					int mtu = session.packetSize + (session.remoteIP.contains(":") ? 48 : 28);
+					doLog(session, "OO Packet size: " + session.packetSize + " bytes; min MTU: " + mtu);
+
 					// reply with protocol version 1 and negotiated packet size
 					reply = frame(FrameID.INIT, 0, seq, new byte[] { 0, 1, (byte) (session.packetSize >> 8), (byte) (session.packetSize) });
 				}
@@ -856,6 +860,8 @@ public class Fastboot extends Thread {
 
 					session = new Session(device, packet.getAddress().getHostAddress(), packet.getPort());
 					sessions.put(remote, session);
+
+					Helper.doLog();
 					doLog(session, "++ Client from " + Helper.beautifyIP(session.remoteIP, session.remotePort));
 				}
 				session.lastSeen = System.nanoTime();
