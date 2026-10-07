@@ -22,8 +22,6 @@ import java.util.Queue;
 public class Fastboot extends Thread {
 
 	public volatile boolean ready = false;
-	final private int udpFastbootPacketMax = 1452; // MTU1500=1452 - MTU1280=1232 - AVM=1024
-	private final Map<String, Session> sessions = new HashMap<>();
 
 	private final Device device;
 	public Fastboot(Device device) {
@@ -39,6 +37,8 @@ public class Fastboot extends Thread {
 		Helper.doLog("P" + session.remotePort, txt);
 	}
 
+	final private int udpFastbootPacketMax = 1452; // MTU1500=1452 - MTU1280=1232 - AVM=1024
+	private final Map<String, Session> sessions = new HashMap<>();
 	private enum SessionMODE {
 		COMMAND, // fastboot and oem commands
 		DOWNLOAD, // recovery -> device eg firmware upload
