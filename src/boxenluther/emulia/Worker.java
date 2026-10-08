@@ -157,7 +157,7 @@ public class Worker extends Thread {
 					fout.write(buf, 0, l);
 				}
 			} catch (Exception e) {
-				doLog("XX BIN failes: " + e.getMessage());
+				doLog("XX BIN failed: " + e.getMessage());
 				e.printStackTrace();
 			}
 			try {
