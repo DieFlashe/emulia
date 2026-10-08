@@ -85,6 +85,16 @@ public class Fastboot extends Thread {
 				if (downloadOut != null)
 					downloadOut.close();
 			} catch (Exception e) {}
+
+			// DEBUG
+			if (!Helper.writeBins()) {
+				for (File file : new File[] { downloadTarget, downloadFile }) {
+					if (file != null && file.exists() && !file.delete())
+						doLog(this, "XX Cannot delete: " + file.getName());
+				}
+				downloadFile = null;
+			}
+
 			downloadOut = null;
 			downloadTarget = null;
 		}
