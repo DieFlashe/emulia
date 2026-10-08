@@ -278,6 +278,15 @@ public class Worker extends Thread {
 			lastHash.put(arg.toLowerCase(), hash);
 			lastFile.put(arg.toLowerCase(), fileName);
 		}
+
+		// DEBUG
+		if (!Helper.writeBins()) {
+			if (!file.delete())
+				doLog("XX Cannot delete: " + file.getName());
+			if (arg != null)
+				lastFile.remove(arg.toLowerCase());
+		}
+
 		doLog("OO Received: " + hash);
 		sendLine(226, "Transfer complete");
 		datClose();
