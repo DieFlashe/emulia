@@ -69,7 +69,7 @@ public final class Helper {
 
 	static private PrintWriter logWriter = null;
 	static public void doWriteLog(String txt) {
-		if (!Helper.writeLogs())
+		if (!Helper.writeLogs()) // DEBUG
 			return;
 		if (logWriter == null) {
 			try {
