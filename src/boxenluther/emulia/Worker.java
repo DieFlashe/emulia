@@ -458,7 +458,7 @@ public class Worker extends Thread {
 					case "EPSV":
 						try {
 							datServer = new ServerSocket(0);
-							final String host = ctlSocket.getLocalAddress().getHostAddress().replace('.', ',');
+							final String host = Helper.beautifyIP(ctlSocket.getLocalAddress().getHostAddress()).replace('.', ',');
 							final String port = (int) (datServer.getLocalPort() / 256) + "," + (int) (datServer.getLocalPort() % 256);
 							sendLine(227, "Entering Passive Mode (" + host + "," + port + ")");
 							dataSocket = datServer.accept();
