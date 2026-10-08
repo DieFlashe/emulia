@@ -207,19 +207,19 @@ public class Searcher extends Thread {
 				switch (packetRX.getLength()) {
 					case 8: // Fastboot IPv6
 						if (!new String(bufferRX, 0, 8).equals("AVMfritz")) {
-							doLog("XX Invalid Fastboot packet received");
+							doLog("XX Invalid FASTBOOT packet received");
 							continue;
 						}
 						if (packetRX.getPort() != 5035) {
-							doLog("XX Invalid Fastboot source port.");
+							doLog("XX Invalid FASTBOOT source port.");
 							continue;
 						}
 						// discovery is able IPv 4+6
 						if (!(packetRX.getAddress() instanceof Inet6Address)) {
-							doLog("XX Invalid Fastboot ip protocoll.");
+							doLog("XX Invalid FASTBOOT ip protocol.");
 							continue;
 						}
-						doLog("XX Detected Fastboot recovery");
+						doLog("OO Detected FASTBOOT recovery");
 
 						// answering (ipv6 only)
 						Inet6Address addressLOC6 = getEndpoint(packetRX.getAddress(), interfaces);
@@ -249,20 +249,20 @@ public class Searcher extends Thread {
 								bufferRX[13] != 0 ||
 								bufferRX[14] != 0 ||
 								bufferRX[15] != 0) {
-							doLog("XX Invalid Adam2 packet received");
+							doLog("XX Invalid ADAM2EVA packet received");
 							continue;
 						}
 						// discovery contains ipv4
 						if (!(packetRX.getAddress() instanceof Inet4Address)) {
-							doLog("XX Invalid Adam2 ip protocol.");
+							doLog("XX Invalid ADAM2EVA ip protocol.");
 							continue;
 						}
-						doLog("XX Detected Adam2 recovery");
+						doLog("OO Detected ADAM2EVA recovery");
 
 						// desired
 						final byte[] addressBYT = new byte[] { bufferRX[8], bufferRX[9], bufferRX[10], bufferRX[11] };
 						final InetAddress addressREQ = InetAddress.getByAddress(addressBYT);
-						doLog("XX Requested ip " + Helper.beautifyIP(addressREQ.getHostAddress()));
+						doLog("OO Requested ip " + Helper.beautifyIP(addressREQ.getHostAddress()));
 
 						// answering
 						Inet4Address addressLOC4 = getEndpoint(remote, addresses);
