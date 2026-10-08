@@ -5,12 +5,12 @@ public class Main {
 	public static void main(String[] args) {
 
 		String confFile = "_Generic";
+		confFile = Helper.confFile(confFile); // DEBUG
 		if (args != null && args.length > 0)
 			confFile = args[0];
 
 //TODO  load custom device-config on start -> discarded -> use args + collected ^^
-		confFile = Helper.confFile(confFile); // DEBUG
-//		confFile = "DEVICE";	//DEVEL
+//		confFile = "DEVICE";	// DEVEL
 
 		int i = -1;
 		i = confFile.lastIndexOf("\\");
