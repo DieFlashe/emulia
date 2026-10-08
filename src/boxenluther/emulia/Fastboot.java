@@ -863,7 +863,7 @@ public class Fastboot extends Thread {
 					continue; // incomplete fastboot header
 
 				// new session
-				String remote = packet.getAddress().getHostAddress() + ":" + packet.getPort();
+				String remote = Helper.beautifyIP(packet.getAddress().getHostAddress(), packet.getPort());
 				Session session = sessions.get(remote);
 				if (session == null) {
 					if (sessions.size() > 99)
