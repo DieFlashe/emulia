@@ -1,0 +1,42 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.12852 0x0 0x46409
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_hours    0
+counter__run_days     0
+counter__run_mounths  0
+counter__run_years    0
+DMC                   SL1,W1
+HardwareFeatures      nand=0xEFBA210000,cpu=0x1BF0101
+HWRevision            270
+HWSubRevision         4
+ProductID             Fritz_Box_HW270
+SerialNumber          123456789012345
+annex                 -
+autoload              yes
+bootloaderVersion     1.12852
+country               *
+firstfreeaddress      0x4B000000
+firmware_info         270.08.26
+firmware_version      avm
+flashsize             nor_size=0MB sflash_size=0KB nand_size=128MB
+language              *
+linux_fs_start        *
+maca                  08:B6:57:*
+macb                  08:B6:57:*
+macwlan               08:B6:57:*
+macwlan2              08:B6:57:*
+macwlan3              08:B6:57:*
+macdsl                08:B6:57:*
+memsize               0x20000000
+mtd0                  0x0,0x2A00000
+mtd1                  0xD40000,0x1540000
+mtd2                  0x0,0x540000
+mtd3                  0x540000,0xD40000
+mtd4                  0x1540000,0x1D40000
+mtd5                  0x1D40000,0x8000000
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+usb_rndis_mac         08:B6:57:*
+wlan_key              12345678901234567890
+wlan_ssid             FRITZ!Repeater#3000#XX

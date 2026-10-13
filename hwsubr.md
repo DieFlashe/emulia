@@ -179,9 +179,17 @@ Known `HWSubRevision` from collected environments
    ProductID `Fritz_Box_HW262`
     * HWSubRevision `4`
 
+ - FRITZ!Smart Gateway<br>
+   ProductID `Fritz_Box_HW265`
+    * HWSubRevision `3`
+
  - FRITZ!Box 6690 Cable<br>
    ProductID `Fritz_Box_HW267`
     * HWSubRevision `1`
+
+ - FRITZ!Repeater 3000 AX<br>
+   ProductID `Fritz_Box_HW270`
+    * HWSubRevision `4`
 
  - FRITZ!Box 7510<br>
    ProductID `Fritz_Box_HW271`
