@@ -69,6 +69,12 @@ public class Device {
 				// empty
 				if (line.isEmpty())
 					continue;
+				if (line.startsWith("#"))
+					continue;
+				if (line.startsWith(";"))
+					continue;
+				if (line.startsWith("/"))
+					continue;
 				// split
 				i = line.indexOf('\t');
 				j = line.indexOf(' ');
