@@ -379,7 +379,7 @@ public class Worker extends Thread {
 					line = line.substring(6);
 				sepidx = line.indexOf(' ');
 				cmd = (((sepidx == -1) ? line : (line.substring(0, sepidx)))).toUpperCase();
-				arg = ((sepidx == -1) ? "" : line.substring(sepidx + 1));
+				arg = ((sepidx == -1) ? "" : line.substring(sepidx + 1)).trim();
 
 				switch (cmd) {
 					case "USER":
@@ -396,32 +396,45 @@ public class Worker extends Thread {
 //							sendLine(530, "Not logged in");
 						}
 						break;
+					case "TEST":
+						switch (arg.toLowerCase()) {
+							case "":
+								sendLine(501, "Syntax error: Invalid number of parameters");
+								break;
+							case "memtest":
+								sendLine(228,"test success");
+								break;
+							default:
+								sendLine(554, "test not implemented");
+								break;
+							}
+						break;
 					case "SYST":
 						sendLine(215, device.dEva());
 						break;
 					case "TYPE":
 						switch (arg.toUpperCase()) {
-						case "I":
-							currentMode = "BINARY";
-							sendLine(200, "Type set to BINARY");
-							break;
-						case "A":
-						default:
-							currentMode = "ASCII";
-							sendLine(200, "Type set to ASCII");
-							break;
+							case "I":
+								currentMode = "BINARY";
+								sendLine(200, "Type set to BINARY");
+								break;
+							case "A":
+							default:
+								currentMode = "ASCII";
+								sendLine(200, "Type set to ASCII");
+								break;
 						}
 						break;
 					case "MEDIA":
 						switch (arg.toUpperCase()) {
-						case "FLSH":
-						case "FLASH":
-							currentMedia = "FLASH";
-							break;
-						case "SDRAM":
-						default:
-							currentMedia = "SDRAM";
-							break;
+							case "FLSH":
+							case "FLASH":
+								currentMedia = "FLASH";
+								break;
+							case "SDRAM":
+							default:
+								currentMedia = "SDRAM";
+								break;
 						}
 						sendLine(200, "Media set to MEDIA_" + currentMedia);
 						break;
