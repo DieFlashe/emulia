@@ -59,16 +59,23 @@ public class Device {
 			while ((line = br.readLine()) != null) {
 //				System.out.println(line);
 				// comments
-				i = line.indexOf("# ");
+				i = line.indexOf(" #");
 				if (i != -1)
 					line = line.substring(0, i);
-				i = line.indexOf("//");
+				i = line.indexOf("\t#");
 				if (i != -1)
 					line = line.substring(0, i);
-				line = line.trim();
+				i = line.indexOf(" //");
+				if (i != -1)
+					line = line.substring(0, i);
+				i = line.indexOf("\t//");
+				if (i != -1)
+					line = line.substring(0, i);
 				// empty
+				line = line.trim();
 				if (line.isEmpty())
 					continue;
+				// comments
 				if (line.startsWith("#"))
 					continue;
 				if (line.startsWith(";"))
