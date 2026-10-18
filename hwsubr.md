@@ -219,6 +219,14 @@ Known `HWSubRevision` from collected environments
     * HWSubRevision `2`
     * HWSubRevision `4`
 
+ - FRITZ!Repeater 1700<br>
+   ProductID `Fritz_Box_HW290`
+    * HWSubRevision `1`
+
+ - FRITZ!Repeater 2700<br>
+   ProductID `Fritz_Box_HW301`
+    * HWSubRevision `1`
+
  - FRITZ!Box 6690 Pro<br>
    ProductID `Fritz_Box_HW308`
     * HWSubRevision `1`
