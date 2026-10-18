@@ -18,6 +18,13 @@ public class Searcher extends Thread {
 	public volatile boolean ready = false;
 	public boolean running = false;
 
+	Boolean runDispatcher;
+	Boolean runFastboot;
+	public Searcher(Boolean runDispatcher, Boolean runFastboot) {
+		this.runDispatcher = runDispatcher;
+		this.runFastboot = runFastboot;
+	}
+
 	final private String tag = "BCT";
 	private void doLog(String txt) {
 		doLog(tag, txt);
@@ -205,7 +212,7 @@ public class Searcher extends Thread {
 
 				// requestion
 				switch (packetRX.getLength()) {
-					case 8: // Fastboot IPv6
+					case 8: // recovery-search FASTBOOT
 						if (!new String(bufferRX, 0, 8).equals("AVMfritz")) {
 							doLog("XX Invalid FASTBOOT packet received");
 							continue;
@@ -214,69 +221,96 @@ public class Searcher extends Thread {
 							doLog("XX Invalid FASTBOOT source port.");
 							continue;
 						}
-						// discovery is able IPv 4+6
-						if (!(packetRX.getAddress() instanceof Inet6Address)) {
-							doLog("XX Invalid FASTBOOT ip protocol.");
+						if (!runFastboot) {
+							doLog("XX Ignored, FASTBOOT is not enabled.");
 							continue;
 						}
 						doLog("OO Detected FASTBOOT recovery");
+ 
+						// answering
+						//Inet6Address xaddressLOC6 = getEndpoint(packetRX.getAddress(), interfaces);
 
-						// answering (ipv6 only)
-						Inet6Address addressLOC6 = getEndpoint(packetRX.getAddress(), interfaces);
-						/*
-						InetAddress addressLOC;
-						if (packetRX.getAddress() instanceof Inet6Address)
-							addressLOC = getEndpoint(packetRX.getAddress(), interfaces);
-						else
-							addressLOC = getEndpoint(remote, addresses);
-						doLog(">> Replying with IP " + Helper.beautifyIP(addressLOC.getHostAddress()));
-						*/
+						bufferTX = new byte[] { 'f', 'r', 'i', 't', 'z', 'A', 'V', 'M' };
+						InetAddress addressLOC6;
+						if (packetRX.getAddress() instanceof Inet6Address) {
+							addressLOC6 = getEndpoint(packetRX.getAddress(), interfaces);
+							doLog(">> Replying with IP " + Helper.beautifyIP(addressLOC6.getHostAddress().split("%")[0] + "%" + ((Inet6Address) addressLOC6).getScopeId()));
+						} else {
+							addressLOC6 = getEndpoint(remote, addresses);
+							doLog(">> Replying with IP " + Helper.beautifyIP(addressLOC6.getHostAddress()));
+						}
 
-						bufferTX = new byte[]{'f','r','i','t','z','A','V','M'};
-
-						doLog(">> Replying with IP " + Helper.beautifyIP(addressLOC6.getHostAddress().split("%")[0] + "%" + addressLOC6.getScopeId()));
 						break;
-					case 16: // Adam2 IPv4
+					case 16: // recovery-search IPv4
+						if (!(packetRX.getAddress() instanceof Inet4Address)) {
+							doLog("XX Invalid, only IPv4 is allowed with this payload");
+							continue;
+						}
 						if (	bufferRX[0] != 00 ||
 								bufferRX[1] != 00 ||
 								bufferRX[2] != 18 || // static
 								bufferRX[3] != 01 || // static
-								bufferRX[4] != 01 || // search
 								bufferRX[5] != 00 ||
 								bufferRX[6] != 00 ||
 								bufferRX[7] != 00 ||
-								bufferRX[12] != 0 ||
-								bufferRX[13] != 0 ||
-								bufferRX[14] != 0 ||
-								bufferRX[15] != 0) {
-							doLog("XX Invalid ADAM2EVA packet received");
+								bufferRX[12] != 0 || // unused
+								bufferRX[13] != 0 || // unused
+								bufferRX[14] != 0 || // unused
+								bufferRX[15] != 0) { // unused
+							doLog("XX Invalid IPv4 packet received");
 							continue;
 						}
-						// discovery contains ipv4
-						if (!(packetRX.getAddress() instanceof Inet4Address)) {
-							doLog("XX Invalid ADAM2EVA ip protocol.");
-							continue;
+						switch (bufferRX[4]) {
+							case 1: // search ADAM2EVA
+								if (!runDispatcher) {
+									doLog("XX Ignored, ADAM2EVA is not enabled.");
+									continue;
+								} else
+									doLog("OO Detected ADAM2EVA recovery");
+								break;
+							case 3: // search FASTBOOT
+								if (!runFastboot) {
+									doLog("XX Ignored, FASTBOOT is not enabled.");
+									continue;
+								} else
+									doLog("OO Detected FASTBOOT IPv4 recovery");
+								break;
+							default:
+								doLog("XX Invalid DISCOVERY type: " + bufferRX[4]);
+								continue;
 						}
-						doLog("OO Detected ADAM2EVA recovery");
 
 						// desired
-						final byte[] addressBYT = new byte[] { bufferRX[8], bufferRX[9], bufferRX[10], bufferRX[11] };
-						final InetAddress addressREQ = InetAddress.getByAddress(addressBYT);
-						doLog("OO Requested ip " + Helper.beautifyIP(addressREQ.getHostAddress()));
+						if (bufferRX[8] != 00 || bufferRX[9] != 00 || bufferRX[10] != 00 || bufferRX[11] != 00) {
+							final byte[] addressBYT = new byte[] { bufferRX[8], bufferRX[9], bufferRX[10], bufferRX[11] };
+							final InetAddress addressREQ = InetAddress.getByAddress(addressBYT);
+							doLog("OO Requested ip " + Helper.beautifyIP(addressREQ.getHostAddress()));
+						} else
+							doLog("OO No requested ip ");
 
 						// answering
 						Inet4Address addressLOC4 = getEndpoint(remote, addresses);
-
 						bufferTX = new byte[16];
 						Arrays.fill(bufferTX, (byte) 0);
 						bufferTX[2] = (byte) 18; // static
 						bufferTX[3] = (byte) 01; // static
-						bufferTX[4] = (byte) 02; // answer
 						byte[] barrayLOC = addressLOC4.getAddress();
-						bufferTX[11] = (byte) barrayLOC[0];
-						bufferTX[10] = (byte) barrayLOC[1];
-						bufferTX[9] = (byte) barrayLOC[2];
-						bufferTX[8] = (byte) barrayLOC[3];
+						switch (bufferRX[4]) {
+							case 1:
+								bufferTX[4] = (byte) 02; // answer: ADAM2EVA
+								bufferTX[11] = (byte) barrayLOC[0];
+								bufferTX[10] = (byte) barrayLOC[1];
+								bufferTX[9] = (byte) barrayLOC[2];
+								bufferTX[8] = (byte) barrayLOC[3];
+								break;
+							case 3:
+								bufferTX[4] = (byte) 04; // answer: FASTBOOT
+								bufferTX[11] = (byte) barrayLOC[3];
+								bufferTX[10] = (byte) barrayLOC[2];
+								bufferTX[9] = (byte) barrayLOC[1];
+								bufferTX[8] = (byte) barrayLOC[0];
+								break;
+						}
 
 						doLog(">> Replying with IP " + addressLOC4.getHostAddress().toString());
 						break;
@@ -285,8 +319,14 @@ public class Searcher extends Thread {
 						continue; 
 				}
 
-				DatagramPacket sendPacket = new DatagramPacket(bufferTX, bufferTX.length, packetRX.getAddress(), broadcastPort);
+
+				int replyPort = (bufferRX.length == 16 && bufferRX[4] == 1) ? broadcastPort : packetRX.getPort(); // broadcast sender
+//				int replyPort = (bufferTX.length == 16 && bufferTX[4] == 2) ? broadcastPort : packetRX.getPort(); // incomming sender
+				DatagramPacket sendPacket = new DatagramPacket(bufferTX, bufferTX.length, packetRX.getAddress(), replyPort);
+//				DatagramPacket sendPacket = new DatagramPacket(bufferTX, bufferTX.length, packetRX.getAddress(), broadcastPort); // always broadcast
 				socketRX.send(sendPacket);
+//				try (DatagramSocket socketTX = new DatagramSocket()) { socketTX.send(sendPacket); } // random sender
+
 			} catch (Exception e) {
 				doLog("XX Shit happend: " + e.toString());
 				e.printStackTrace();

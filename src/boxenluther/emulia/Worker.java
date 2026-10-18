@@ -402,7 +402,7 @@ public class Worker extends Thread {
 								sendLine(501, "Syntax error: Invalid number of parameters");
 								break;
 							case "memtest":
-								sendLine(228,"test success");
+								sendLine(228, "test success");
 								break;
 							default:
 								sendLine(554, "test not implemented");

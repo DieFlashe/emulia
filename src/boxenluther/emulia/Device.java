@@ -137,11 +137,13 @@ public class Device {
 			}
 
 			// urlader
-			final String dLader = dLader();
-			if (dLader != null)
-				mapEnv.put("urlader-version", dLader);
-			else
-				mapEnv.remove("urlader-version");
+			if (isParadise()) {
+				final String dLader = dLader();
+				if (dLader != null)
+					mapEnv.put("urlader-version", dLader);
+				else
+					mapEnv.remove("urlader-version");
+			}
 
 			// emulia
 			mapEnv.put("emulia__emulator", "true");
@@ -290,7 +292,7 @@ public class Device {
 		return content;
 	}
 	public boolean isSubmarine() {
-		return mapEnv.containsKey("ftp__uboot");
+		return mapEnv.containsKey("ftp__uboot") && mapEnv.containsKey("ftp__fboot");
 	}
 	public String dUboot() {
 		// from DieFlashe
@@ -298,6 +300,13 @@ public class Device {
 			return mapEnv.get("ftp__uboot");
 
 		return "U-Boot 2000.00-EMU-1.00";
+	}
+	public String dFboot() {
+		// from DieFlashe
+		if (mapEnv.containsKey("ftp__fboot"))
+			return mapEnv.get("ftp__fboot");
+
+		return "0.4";
 	}
 	public boolean isParadise() {
 		return mapEnv.containsKey("ftp__banner") && mapEnv.containsKey("ftp__system");

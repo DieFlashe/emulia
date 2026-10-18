@@ -30,21 +30,22 @@ public class Main {
 		Helper.doLog();
 
 
-		final Searcher searcher = new Searcher();
+		final Boolean runFastboot = device == null || device.isSubmarine();
+		final Boolean runDispatcher = device == null || device.isParadise();
+
+		final Searcher searcher = new Searcher(runDispatcher, runFastboot);
 		searcher.start();
 		while (!searcher.ready) {
 			try { Thread.sleep(9); }
 			catch (Exception e) {}
 		}
 
-		final Boolean runFastboot = device == null || device.isSubmarine();
 		Fastboot fastboot = null;
 		if (runFastboot) {
 			fastboot = new Fastboot(device);
 			fastboot.start();
 		}
 
-		final Boolean runDispatcher = device == null || device.isParadise();
 		Dispatcher dispatcher = null;
 		if (runDispatcher) {
 			dispatcher = new Dispatcher(device);
