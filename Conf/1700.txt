@@ -1,0 +1,28 @@
+ftp__dsize            0x04000000
+ftp__fboot            0.4
+ftp__uboot            U-Boot 2024.10-AVM-1.32
+counter__branding     avm
+counter__reboot_cnt   0
+counter__reboot_ver   3
+counter__run_hours    0
+counter__run_days     0
+counter__run_mounths  0
+counter__run_years    0
+DMC                   SL1
+HWRevision            290
+HWSubRevision         1
+ProductID             Fritz_Box_HW290
+SerialNumber          123456789012345
+SoftwareFeatures      *
+annex                 Ohne
+bootloaderVersion     1.32
+country               *
+firmware_info         290.08.06
+firmware_version      avm
+language              *
+linux_fs_start        *
+maca                  0c:c5:74:*
+my_ipaddress          192.168.178.1
+webgui_pass           12345678
+wlan_key              12345678901234567890
+wlan_ssid             FRITZ!Repeater 1700 XX
