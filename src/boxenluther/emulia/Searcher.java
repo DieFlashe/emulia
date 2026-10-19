@@ -202,6 +202,8 @@ public class Searcher extends Thread {
 
 				// ratelimit
 				remote = packetRX.getAddress().getHostAddress();
+				if (packetRX.getPort() == broadcastPort)
+					remote += ":" + broadcastPort;
 				now = System.currentTimeMillis();
 				lastAnswer = lastRemotes.get(remote);
 				if (lastAnswer != null && lastAnswer + 1000 > now) {
