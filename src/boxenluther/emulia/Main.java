@@ -52,7 +52,7 @@ public class Main {
 			dispatcher.start();
 		}
 
-		while ((runFastboot && !fastboot.ready) && (runDispatcher && !dispatcher.ready)) {
+		while ((runFastboot && !fastboot.ready) || (runDispatcher && !dispatcher.ready)) {
 			try { Thread.sleep(9); }
 			catch (Exception e) {}
 		}
