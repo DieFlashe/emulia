@@ -129,17 +129,6 @@ public class Fastboot extends Thread {
 		resultOKAY(session, "");
 	}
 
-	private boolean envAllowed(String key) {
-		if (key.equals("emulia__emulator"))
-			return false;
-		if (key.equals("debagger__user"))
-			return false;
-		if (key.startsWith("ftp__"))
-			return false;
-		if (key.startsWith("counter__"))
-			return false;
-		return true;
-	}
 	private String envGet(Session session, String key) {
 		synchronized (session.device) {
 			return session.device.getEnvVal(key);
@@ -168,8 +157,7 @@ public class Fastboot extends Thread {
 					i++;
 
 				String key = line.substring(0, i);
-				if (envAllowed(key))
-					ret.put(key, session.device.getEnvVal(key));
+				ret.put(key, session.device.getEnvVal(key));
 			}
 		}
 		return ret;
