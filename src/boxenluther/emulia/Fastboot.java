@@ -10,6 +10,7 @@ import java.net.InetSocketAddress;
 import java.net.SocketTimeoutException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -220,8 +221,7 @@ public class Fastboot extends Thread {
 				String branding = envGet(session, key);
 				if (branding == null)
 					branding = "";
-				return (branding + "\0").getBytes(java.nio.charset.StandardCharsets.US_ASCII);
-
+				return (branding + "\0").getBytes(StandardCharsets.US_ASCII);
 			case 1031:
 				key = "counter__reboot_ver";
 				bitCounter = false;
