@@ -1,6 +1,7 @@
 package boxenluther.emulia;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -61,6 +62,7 @@ public class Fastboot extends Thread {
 		byte[] lastRequest;
 		byte[] lastResponse;
 		final Queue<byte[]> replies = new ArrayDeque<>();
+		final ByteArrayOutputStream commandData = new ByteArrayOutputStream();
 		SessionMODE mode = SessionMODE.COMMAND;
 		long downloadSize;
 		long downloadReceived;
@@ -721,7 +723,13 @@ public class Fastboot extends Thread {
 				}
 			} else {
 				// command mode: decode payload and execute command
-				fastbootCMD(session, Helper.bytes2string(data));
+				session.commandData.write(data, 0, data.length);
+				if ((flags & 1) == 0) {
+					// command fully assembled
+					byte[] command = session.commandData.toByteArray();
+					session.commandData.reset();
+					fastbootCMD(session, Helper.bytes2string(command));
+				}
 			}
 
 			// acknowledge received packet; command result follows on a poll
@@ -772,6 +780,7 @@ public class Fastboot extends Thread {
 				else {
 					session.closeDownload();
 					session.replies.clear();
+					session.commandData.reset();
 					session.mode = SessionMODE.COMMAND;
 					session.selectedData = new byte[0];
 					session.downloadFile = null;
@@ -808,6 +817,7 @@ public class Fastboot extends Thread {
 			} catch (Exception e) {
 				doLog(session, "XX Fastboot command failed: " + e.toString());
 				session.closeDownload();
+				session.commandData.reset();
 				session.mode = SessionMODE.COMMAND;
 
 				resultFAIL(session, "Command failed: " + e.getMessage());
