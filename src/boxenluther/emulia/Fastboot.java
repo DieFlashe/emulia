@@ -604,6 +604,26 @@ public class Fastboot extends Thread {
 					case "version-bootloader":
 						value = envGet(session, "ftp__uboot");
 						break;
+					case "all":
+						LinkedHashMap<String, String> variables = new LinkedHashMap<>();
+						variables.put("version", envGet(session, "ftp__fboot"));
+						variables.put("version-bootloader", envGet(session, "ftp__uboot"));
+						variables.put("downloadsize", envGet(session, "ftp__dsize"));
+						variables.put("max-download-size", envGet(session, "ftp__dsize"));
+						variables.put("serialno", "Value not set");
+						variables.put("version-baseband", "N/A");
+						variables.put("product", "bcmbca");
+						variables.put("platform", "platform not set");
+						variables.put("current-slot", "a");
+						variables.put("is-userspace", "no");
+						for (Map.Entry<String, String> entry : variables.entrySet()) {
+							String val = entry.getValue();
+							if (val == null)
+								val = "Variable not set";
+							result_RAW(session, "INFO", entry.getKey() + ": " + val);
+						}
+						resultOKAY(session);
+						return;
 				}
 				if (value == null) {
 					doLog(session, "XX Variable missing: " + arg);
