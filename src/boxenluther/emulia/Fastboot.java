@@ -445,7 +445,7 @@ public class Fastboot extends Thread {
 			case "get_env":
 				String value = envGet(session, val);
 				if (value == null)
-					resultFAIL(session, "Variable not found");
+					resultFAIL(session, "Not a valid TFFS variable name");
 				else
 					resultOKAY(session, value);
 				break;
@@ -455,9 +455,9 @@ public class Fastboot extends Thread {
 					if (envSet(session, val.substring(0, i), val.substring(i + 1)))
 						resultOKAY(session);
 					else
-						resultFAIL(session, "Invalid environment variable");
+						resultFAIL(session, "Not a valid TFFS variable name");
 				} else {
-					resultFAIL(session, "Invalid set_env arguments");
+					resultFAIL(session, "Missing variable name");
 				}
 				break;
 			case "set_env_all":
