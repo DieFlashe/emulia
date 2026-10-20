@@ -407,7 +407,31 @@ public class Fastboot extends Thread {
 				resultFAIL(session, "Device is finalized");
 				break;
 			case "test":
-				resultOKAY(session, val);
+				String[] testArgs = val.split(":", -1);
+				switch (testArgs[0]) {
+					case "":
+						resultFAIL(session, "The fastboot command needs parameters to work");
+						break;
+					case "short_memtest":
+						for (int n = 0; n < 3; n++)
+							result_RAW(session, "INFO", "testing");
+						resultOKAY(session);
+						break;
+					case "buttons":
+						resultOKAY(session, "0x0");
+						break;
+					case "led":
+						if (testArgs.length < 2 || testArgs[1].isEmpty())
+							resultFAIL(session, "Invalid usage of the test command");
+						else {
+							result_RAW(session, "INFO", "testing");
+							resultOKAY(session);
+						}
+						break;
+					default:
+						resultFAIL(session, "Unknown test command");
+						break;
+				}
 				break;
 			case "get_env_all":
 				String selectedData = "";
