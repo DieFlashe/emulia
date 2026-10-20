@@ -62,6 +62,7 @@ public class Fastboot extends Thread {
 		byte[] lastRequest;
 		byte[] lastResponse;
 		final Queue<byte[]> replies = new ArrayDeque<>();
+		boolean lastTesting;
 		final ByteArrayOutputStream commandData = new ByteArrayOutputStream();
 		SessionMODE mode = SessionMODE.COMMAND;
 		long downloadSize;
@@ -597,6 +598,7 @@ public class Fastboot extends Thread {
 
 		// reset sessionExpireForce on further commands after re/boot
 		sessionExpireReset(session);
+		session.lastTesting = false;
 
 		if (line.startsWith("oem ")) {
 			fastbootOEM(session, line.substring(4));
@@ -707,6 +709,19 @@ public class Fastboot extends Thread {
 				// send queued responses before upload data
 
 				byte[] reply = session.replies.remove();
+				// Continuation fragments belong to the same response.
+				if (session.lastResponse == null || (session.lastResponse[1] & 1) == 0) {
+					boolean testing = Arrays.equals(reply, Helper.string2bytes("INFOtesting"));
+					if (testing && session.lastTesting) {
+						try { Thread.sleep(1000); }
+						catch (InterruptedException e) {
+							session.replies.clear();
+							Thread.currentThread().interrupt();
+							throw new IOException("Interrupted while waiting for response", e);
+						}
+					}
+					session.lastTesting = testing;
+				}
 				int max = session.packetSize - 4;
 
 				if (reply.length <= max) {
