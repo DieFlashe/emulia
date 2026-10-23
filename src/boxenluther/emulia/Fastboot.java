@@ -290,8 +290,10 @@ public class Fastboot extends Thread {
 		long size = Long.parseLong(arg, 16);
 		if (size < 0) // max 4GB
 			throw new IOException("Invalid download size");
-		if (size > 384 *1024 *1024) // 384MB, max 4GB
-			throw new IOException("Download too large");
+		if (size > Long.decode(session.device.dDsize())) {
+			resultFAIL(session, arg);
+			return;
+		}
 		File dir = new File(Helper.getOutPath());
 		if (!dir.isDirectory() && !dir.mkdirs())
 			throw new IOException("Cannot create output directory");
@@ -622,20 +624,20 @@ public class Fastboot extends Thread {
 				switch (arg) {
 					case "max-download-size":
 					case "downloadsize":
-						value = envGet(session, "ftp__dsize");
+						value = session.device.dDsize();
 						break;
 					case "version":
-						value = envGet(session, "ftp__fboot");
+						value = session.device.dFboot();
 						break;
 					case "version-bootloader":
-						value = envGet(session, "ftp__uboot");
+						value = session.device.dUboot();
 						break;
 					case "all":
 						LinkedHashMap<String, String> variables = new LinkedHashMap<>();
-						variables.put("version", envGet(session, "ftp__fboot"));
-						variables.put("version-bootloader", envGet(session, "ftp__uboot"));
-						variables.put("downloadsize", envGet(session, "ftp__dsize"));
-						variables.put("max-download-size", envGet(session, "ftp__dsize"));
+						variables.put("version", session.device.dFboot());
+						variables.put("version-bootloader", session.device.dUboot());
+						variables.put("downloadsize", session.device.dDsize());
+						variables.put("max-download-size", session.device.dDsize());
 						variables.put("serialno", "Value not set");
 						variables.put("version-baseband", "N/A");
 						variables.put("product", "bcmbca");

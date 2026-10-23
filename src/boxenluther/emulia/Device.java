@@ -291,6 +291,12 @@ public class Device {
 		content.add(minLen22("run_years") + run_years);
 		return content;
 	}
+	public String dDsize() {
+		if (mapEnv.containsKey("ftp__dsize"))
+			return mapEnv.get("ftp__dsize");
+
+		return "0x09000000"; // 144 MB, max 4GB
+	}
 	public boolean isSubmarine() {
 		return mapEnv.containsKey("ftp__uboot") && mapEnv.containsKey("ftp__fboot");
 	}
