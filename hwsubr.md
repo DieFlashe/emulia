@@ -223,6 +223,10 @@ Known `HWSubRevision` from collected environments
    ProductID `Fritz_Box_HW290`
     * HWSubRevision `1`
 
+ - FRITZ!Box 5690 XGS<br>
+   ProductID `Fritz_Box_HW295`
+    * HWSubRevision `1`
+
  - FRITZ!Repeater 2700<br>
    ProductID `Fritz_Box_HW301`
     * HWSubRevision `1`
