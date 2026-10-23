@@ -421,7 +421,7 @@ public class Fastboot extends Thread {
 						resultOKAY(session);
 						break;
 					case "buttons":
-						resultOKAY(session, "0x0");
+						resultOKAY(session, session.sequence < 17 ? "0x1" : "0x0");
 						break;
 					case "led":
 						if (testArgs.length < 2 || testArgs[1].isEmpty())
