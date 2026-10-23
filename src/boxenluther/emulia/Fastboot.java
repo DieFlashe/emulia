@@ -187,6 +187,31 @@ public class Fastboot extends Thread {
 		return ret;
 	}
 
+	private byte[] macAddresses(Session session) {
+		String value = envGet(session, "maca");
+		if (value == null || !value.matches("(?i)([0-9a-f]{2}:){5}[0-9a-f]{2}"))
+			throw new IllegalArgumentException("Missing or invalid maca");
+		long base = Long.parseLong(value.replace(":", ""), 16);
+
+		LinkedHashMap<String, Long> addresses = new LinkedHashMap<>();
+		addresses.put("maceth_0", base - 38);
+		for (int i = 0; i < 16; i++)
+			addresses.put("macwifi_" + i, base + 11 + i);
+		addresses.put("maca", base);
+		addresses.put("macb", base + 1);
+		for (int i = 0; i < 3; i++)
+			addresses.put("macrouter_" + i, base + 2 + i);
+
+		String result = "";
+		for (Map.Entry<String, Long> entry : addresses.entrySet()) {
+			long mac = entry.getValue();
+			result += entry.getKey() + "\t" + String.format("%02x:%02x:%02x:%02x:%02x:%02x",
+					(mac >>> 40) & 255, (mac >>> 32) & 255, (mac >>> 24) & 255,
+					(mac >>> 16) & 255, (mac >>> 8) & 255, mac & 255) + "\n";
+		}
+		return result.getBytes(StandardCharsets.US_ASCII);
+	}
+
 	private long counterNumber(Session session, String key, long maximum) {
 		String val = envGet(session, key);
 		long number = Long.parseLong(val);
@@ -560,8 +585,8 @@ public class Fastboot extends Thread {
 			case "get_mac_addresses":
 				session.selectedData = new byte[0];
 				session.selectedName = arg;
-				doLog(session, "XX Not emulated: oem " + arg);
-				resultFAIL(session, "Not emulated: " + cmd);
+				session.selectedData = macAddresses(session);
+				resultOKAY(session);
 				break;
 			case "set_mac_addresses":
 				downloadRename(session, "mac-addresses");
