@@ -25,8 +25,9 @@ public class Fastboot extends Thread {
 
 	public volatile boolean ready = false;
 
-	// MTU1500=1452 - MTU1280=1232 - AVM=1024
-	final private int udpFastbootPacketMax = 1452;
+	// MTU1500=1452 - MTU1280=1232 - AVM=1024 - IPv4=65507 IPv6=65527
+	// ACKs are worser than fragmentation !!
+	final private int udpFastbootPacketMax = 65500;
 
 	private final Device device;
 	public Fastboot(Device device) {
@@ -876,8 +877,9 @@ public class Fastboot extends Thread {
 					session.initialized = true;
 
 					// show size + min-mtu
-					int mtu = session.packetSize + (session.remoteIP.contains(":") ? 48 : 28);
-					doLog(session, "OO Packet size: " + session.packetSize + " bytes; min MTU: " + mtu);
+					doLog(session, "OO Packet size: " + session.packetSize + " bytes");
+					//int mtu = session.packetSize + (session.remoteIP.contains(":") ? 48 : 28);
+					//doLog(session, "OO Packet size: " + session.packetSize + " bytes; min MTU: " + mtu);
 
 					// reply with protocol version 1 and negotiated packet size
 					reply = frame(FrameID.INIT, 0, seq, new byte[] { 0, 1, (byte) (session.packetSize >> 8), (byte) (session.packetSize) });
