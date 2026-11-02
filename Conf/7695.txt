@@ -1,0 +1,38 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.13386 0x0 0x1446409
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_hours    0
+counter__run_days     0
+counter__run_mounths  0
+counter__run_years    0
+DMC                   SL1
+HardwareFeatures      fiber_connector=lc-apc,h_hsg=Catania,h_body=WH,h_acc1=WH,h_acc2=WH
+HWRevision            316
+HWSubRevision         2
+ProductID             Fritz_Box_HW316
+SerialNumber          123456789012345
+SoftwareFeatures      *
+annex                 B
+autoload              yes
+bootloaderVersion     1.13386
+dtbsuffix             fiber
+firstfreeaddress      0x4AE80000
+firmware_info         316.08.46
+firmware_version      avm
+flashsize             nor_size=0MB sflash_size=0KB nand_size=256MB emmc_size=0MB
+gpon_serial           123456789012
+linux_fs_start        *
+maca                  48:7F:80:*
+memsize               0x40000000
+mtd0                  0x0,0x5000000
+mtd1                  0xE00000,0x1600000
+mtd2                  0x0,0x600000
+mtd3                  0x600000,0xE00000
+mtd4                  0x1600000,0x1E00000
+mtd5                  0x1E00000,0x10000000
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+webgui_pass           12345678
+wlan_key              12345678901234567890
+wlan_ssid             FRITZ!Box#7-90#XX
