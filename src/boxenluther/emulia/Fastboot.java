@@ -314,8 +314,10 @@ public class Fastboot extends Thread {
 
 	private void downloadStart(Session session, String arg) throws IOException {
 		long size = Long.parseLong(arg, 16);
-		if (size < 0) // max 4GB
+		if (size < 0)
 			throw new IOException("Invalid download size");
+		if (size > 0xffffffffL) // max 4GB
+			throw new IOException("More than 4GB are not supported");
 		if (size > Long.decode(session.device.dDsize())) {
 			resultFAIL(session, arg);
 			return;
