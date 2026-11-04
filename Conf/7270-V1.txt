@@ -1,0 +1,45 @@
+ftp__banner           ADAM2 FTP Server ready
+ftp__system           AVM EVA Version 1.371 0x0 0x41D
+counter__reboot_major 0
+counter__reboot_minor 0
+counter__run_hours    0
+counter__run_days     0
+counter__run_mounths  0
+counter__run_years    0
+HWRevision            122
+ProductID             Fritz_Box_7270
+SerialNumber          0000000000000000
+annex                 B
+autoload              yes
+bootloaderVersion     1.371
+bootserport           tty0
+cpufrequency          360000000
+firstfreeaddress      0x946BD51C
+firmware_info         54.04.89
+firmware_version      avm
+flashsize             0x00800000
+jffs2_size            6
+maca                  00:1C:4A:*
+macb                  00:1C:4A:*
+macwlan               00:1C:4A:*
+macdsl                00:1C:4A:*
+memsize               0x04000000
+modetty0              38400,n,8,1,hw
+modetty1              38400,n,8,1,hw
+mtd0                  0x90000000,0x90000000
+mtd1                  0x90010000,0x90780000
+mtd2                  0x90000000,0x90010000
+mtd3                  0x90780000,0x907C0000
+mtd4                  0x907C0000,0x90800000
+my_ipaddress          192.168.178.1
+prompt                Eva_AVM
+req_fullrate_freq     120000000
+sysfrequency          120000000
+urlader-version       1371
+usb_board_mac         00:1C:4A:*
+usb_device_id         0x5E00
+usb_device_name       USB DSL Device
+usb_manufacturer_name  AVM
+usb_revision_id       0x0200
+usb_rndis_mac         00:1C:4A:*
+wlan_key              1234567890123456

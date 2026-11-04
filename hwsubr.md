@@ -10,6 +10,10 @@ Known `HWSubRevision` and `bootloaderVersion` from collected environments
    ProductID `Fritz_Box_3370`
     * HWSubRevision `5` - bootloaderVersion: `1.1475`
 
+ - FRITZ!Box Fon WLAN 7270 v1<br>
+   ProductID `Fritz_Box_7270`
+    * HWSubRevision `-` - bootloaderVersion: `1.371`
+
  - FRITZ!Box Fon WLAN 7320<br>
    ProductID `Fritz_Box_7320`
     * HWSubRevision `-` - bootloaderVersion: `1.1109`
