@@ -409,7 +409,7 @@ public class Fastboot extends Thread {
 		final String val;
 		if (sep == -1) {
 			cmd = arg;
-			val = "";
+			val = null;
 		} else {
 			cmd = arg.substring(0, sep);
 			val = arg.substring(sep + 1);
@@ -436,6 +436,10 @@ public class Fastboot extends Thread {
 				resultFAIL(session, "Device is finalized");
 				break;
 			case "test":
+				if (val == null) {
+					resultFAIL(session, "The fastboot command needs parameters to work");
+					break;
+				}
 				String[] testArgs = val.split(":", -1);
 				switch (testArgs[0]) {
 					case "":
@@ -471,20 +475,32 @@ public class Fastboot extends Thread {
 				resultOKAY(session);
 				break;
 			case "get_env":
-				String value = envGet(session, val);
-				if (value == null)
+				if (val == null) { // oem get_env
+					resultFAIL(session, "Missing variable name");
+					break;
+				}
+				if (!session.device.hadEnvVar(val)) // oem get_env: oem get_env:xxx oem get_env:xxx: oem get_env:provider:
 					resultFAIL(session, "Not a valid TFFS variable name");
-				else
-					resultOKAY(session, value);
+				else {
+					String value = envGet(session, val);
+					if (value == null)
+						resultFAIL(session, "Variable not found");
+					else
+						resultOKAY(session, value);
+				}
 				break;
 			case "set_env":
+				if (val == null) { // oem set_env
+					resultFAIL(session, "The fastboot command needs parameters to work");
+					break;
+				}
 				int i = val.indexOf(':');
 				if (i > 0) {
 					if (envSet(session, val.substring(0, i), val.substring(i + 1)))
 						resultOKAY(session);
-					else
+					else // oem set_env:xxx:x
 						resultFAIL(session, "Not a valid TFFS variable name");
-				} else {
+				} else { // oem set_env: + oem set_env:xxx
 					resultFAIL(session, "Missing variable name");
 				}
 				break;
@@ -509,7 +525,7 @@ public class Fastboot extends Thread {
 				break;
 			case "tffs_read":
 				session.selectedData = new byte[0];
-				session.selectedName = "TFFS " + val;
+				session.selectedName = "TFFS " + (val != null ? val : "nan");
 				int rID = -1;
 				try { rID = Integer.parseInt(val); }
 				catch (NumberFormatException e) {}
@@ -539,7 +555,7 @@ public class Fastboot extends Thread {
 				break;
 			case "factory_defaults":
 				// unimplemented: load some default-environment, should keep reboot_ver
-				if (val.equals("wipe_env"))
+				if (val != null && val.equals("wipe_env"))
 					counterReset(session);
 				resultOKAY(session);
 				break;
@@ -550,7 +566,7 @@ public class Fastboot extends Thread {
 				downloadFirmware(session, cmd);
 				break;
 			case "fw_ramload":
-				if (val.equals("wipe_env"))
+				if (val != null && val.equals("wipe_env"))
 					doLog(session, "OO Ignoring bootloader update");
 				downloadFirmware(session, cmd);
 				break;
@@ -559,7 +575,10 @@ public class Fastboot extends Thread {
 				break;
 			case "boot":
 				boolean boot_valid = true;
-				switch (val) {
+				if (val == null)
+					doLog(session, "OO Booting active slot");
+				else {
+					switch (val) {
 					case "":
 						doLog(session, "OO Booting active slot");
 						break;
@@ -572,6 +591,7 @@ public class Fastboot extends Thread {
 					default:
 						boot_valid = false;
 						break;
+					}
 				}
 				if (boot_valid) {
 					sessionExpireForce(session);
