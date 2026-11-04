@@ -516,9 +516,12 @@ public class Fastboot extends Thread {
 
 				// set new variables
 				String badName = "";
-				for (Map.Entry<String, String> entry : env.entrySet())
+				for (Map.Entry<String, String> entry : env.entrySet()) {
+					if (entry.getKey().equals("debagger__user") || entry.getKey().equals("emulia__emulator")) 
+						continue;
 					if (!envSet(session, entry.getKey(), entry.getValue()))
 						badName += " " + entry.getKey();
+				}
 
 				if (badName.isEmpty())
 					resultOKAY(session);
