@@ -884,7 +884,7 @@ public class Fastboot extends Thread {
 			else {
 				// host's maximum packet size, including the header
 				int max = ((request[6] & 255) << 8) | (request[7] & 255);
-				if (max < 8)
+				if (max < 512)
 					reply = frame(FrameID.ERROR, 0, seq, Helper.string2bytes("Packet size too small"));
 				else {
 					session.closeDownload();
