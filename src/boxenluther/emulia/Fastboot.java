@@ -510,6 +510,16 @@ public class Fastboot extends Thread {
 				downloadRename(session, "environment");
 				LinkedHashMap<String, String> env = envParse(downloadedMeta(session));
 
+				// check variables first
+				for (String key : env.keySet()) {
+					if (key.equals("debagger__user") || key.equals("emulia__emulator"))
+						continue;
+					if (!session.device.hadEnvVar(key)) {
+						resultFAIL(session, "Invalid environment variable(s): " + key);
+						return;
+					}
+				}
+
 				// clean all variables
 				for (String key : envAll(session).keySet())
 					envSet(session, key, "");
