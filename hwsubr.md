@@ -18,6 +18,10 @@ Known `HWSubRevision` and `bootloaderVersion` from collected environments
    ProductID `Fritz_Box_7320`
     * HWSubRevision `-` - bootloaderVersion: `1.1109`
 
+ - FRITZ!Box 7330<br>
+   ProductID `Fritz_Box_7322`
+    * HWSubRevision `2` - bootloaderVersion: `1.1939`
+
  - FRITZ!Box Fon WLAN 7390<br>
    ProductID `Fritz_Box_7390`
     * HWSubRevision `3` - bootloaderVersion: `1.1939` + `1.947`
@@ -208,7 +212,7 @@ Known `HWSubRevision` and `bootloaderVersion` from collected environments
     * HWSubRevision `32` - bootloaderVersion: `1.12319`
     * HWSubRevision `62` - bootloaderVersion: `1.12319`
 
- - FRITZ!Box 7520<br>
+ - FRITZ!Box 7520 B<br>
    ProductID `Fritz_Box_HW276`
     * HWSubRevision `1` - bootloaderVersion: `1.11835`
 
