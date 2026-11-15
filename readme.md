@@ -34,7 +34,8 @@ If you like the program, I would be happy to receive a donation.
  - Known [HWSubRevisions](hwsubr.md)
 
 ### Links
- - [Sources](https://github.com/DieFlashe/emulia)
- - [Discussions](https://github.com/orgs/DieFlashe/discussions)
- - [Github](https://github.com/DieFlashe/)
+ - [Download Sources](https://github.com/DieFlashe/emulia)
+ - [Discussions Forum](https://github.com/orgs/DieFlashe/discussions)
+ - [Github Organisation](https://github.com/DieFlashe/)
+ - [Organisation Homepage](https://dieflashe.github.io/)
 
